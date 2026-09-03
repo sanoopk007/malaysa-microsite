@@ -1,0 +1,9 @@
+# These files are only meant to be require()'d by pages in the site root
+# or subfolders, never requested directly. send-enquiry.php is the one
+# exception — the contact form posts to it directly.
+<FilesMatch "\.php$">
+  Require all denied
+</FilesMatch>
+<Files "send-enquiry.php">
+  Require all granted
+</Files>

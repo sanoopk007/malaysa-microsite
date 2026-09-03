@@ -1,0 +1,28 @@
+/* ==========================================================================
+   RTL overrides for Arabic. Loaded only when $lang === 'ar'.
+   Most spacing already uses logical properties / html[dir="rtl"] selectors
+   in style.css — this file covers the remaining mirrored details.
+   ========================================================================== */
+
+html[dir="rtl"] body { font-family: var(--font-arabic); }
+html[dir="rtl"] h1, html[dir="rtl"] h2, html[dir="rtl"] h3,
+html[dir="rtl"] h4, html[dir="rtl"] h5, html[dir="rtl"] .site-nav__link,
+html[dir="rtl"] .mobile-drawer__link { font-family: var(--font-arabic); font-weight: 700; }
+
+html[dir="rtl"] .bi-arrow-right::before { content: "\f12f"; } /* mirror to arrow-left glyph */
+
+html[dir="rtl"] .swiper-nav-group { flex-direction: row-reverse; }
+
+html[dir="rtl"] .hero__ctas,
+html[dir="rtl"] .final-cta__ctas { direction: rtl; }
+
+html[dir="rtl"] .package-card__footer,
+html[dir="rtl"] .dest-card__body,
+html[dir="rtl"] .why-malaysia__list li { direction: rtl; text-align: right; }
+
+html[dir="rtl"] .intro__collage-badge i { margin-inline-start: 0.2em; }
+
+html[dir="rtl"] .site-footer__col,
+html[dir="rtl"] .site-footer__bottom { text-align: right; }
+
+html[dir="rtl"] .mega-menu__item:hover { padding-inline-start: 0.9em; padding-inline-end: 1.2em; }

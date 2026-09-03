@@ -1,0 +1,47 @@
+Options -Indexes
+
+# This path is resolved from the server's actual document root, not from
+# wherever this .htaccess file lives. It is correct as-is ONLY when this
+# site is deployed at the domain/subdomain root (e.g. public_html/), as the
+# project brief specifies. If it's ever deployed into a subfolder instead
+# (e.g. public_html/malaysia/), change this to match, e.g. "/malaysia/404.php"
+# — otherwise Apache will show its own default error page instead of ours.
+ErrorDocument 404 /404.php
+
+<IfModule mod_php7.c>
+  php_flag display_errors off
+</IfModule>
+<IfModule mod_php8.c>
+  php_flag display_errors off
+</IfModule>
+
+# ---- Security headers ----
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ---- Compression ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---- Browser caching ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # SVGs are still placeholder artwork being iterated on — cache briefly so
+  # browsers pick up regenerated files quickly. Switch to "access plus 1
+  # month" once assets/images/** are replaced with final WebP/AVIF photos.
+  ExpiresByType image/svg+xml "access plus 1 hour"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  # CSS/JS are still under active development — short cache so edits show up
+  # on refresh instead of serving a stale cached copy. Switch back to
+  # "access plus 1 week" once the build is stable ahead of launch.
+  ExpiresByType text/css "access plus 5 minutes"
+  ExpiresByType application/javascript "access plus 5 minutes"
+</IfModule>
