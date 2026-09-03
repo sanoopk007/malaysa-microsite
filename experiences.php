@@ -4,11 +4,51 @@ require_once __DIR__ . '/includes/destination-data.php';
 require_once __DIR__ . '/includes/experience-data.php';
 
 $base = '';
-$pageTitle = t('Experiences | Visit Malaysia 2026–2027', 'التجارب | زوروا ماليزيا 2026–2027');
-$pageDescription = t('Explore Malaysia through nature, culture, food, adventure and more — eleven ways to experience the country, curated with Khimji Travel.', ar_pending());
+$siteRoot = site_root_url($base);
+
+$pageTitle = t('Malaysia Travel Experiences | Khimji Travel', 'تجارب السفر في ماليزيا | خيمجي للسفر');
+$pageDescription = t(
+    'Explore Malaysia through nature, culture, food, adventure and more — eleven ways to experience the country, curated with Khimji Travel.',
+    'استكشف ماليزيا عبر الطبيعة والثقافة والطعام والمغامرة والمزيد — أحد عشر أسلوبًا لتجربة البلاد مع خيمجي للسفر.'
+);
+$pageCanonical = $siteRoot . 'experiences.php';
+$pageImage = $siteRoot . 'assets/images/optimized/misc-experiences-hero.jpg';
 
 $destBySlug = [];
 foreach ($destinations as $d) { $destBySlug[$d['slug']] = $d; }
+
+$experienceListItems = [];
+foreach ($experiences as $i => $e) {
+    $experienceListItems[] = [
+        '@type' => 'ListItem',
+        'position' => $i + 1,
+        'item' => [
+            '@type' => 'Thing',
+            'name' => $e['title_en'],
+            'description' => $e['desc_en'],
+            'url' => $pageCanonical . '#' . $e['slug'],
+            'image' => $siteRoot . $e['image'] . '.jpg',
+        ],
+    ];
+}
+
+$pageSchema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => t('Home', 'الرئيسية'), 'item' => $siteRoot],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => t('Experiences', 'التجارب'), 'item' => $pageCanonical],
+            ],
+        ],
+        [
+            '@type' => 'ItemList',
+            'name' => 'Malaysia travel experiences featured on Visit Malaysia 2026–2027',
+            'itemListElement' => $experienceListItems,
+        ],
+    ],
+];
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" dir="<?= $dir ?>">

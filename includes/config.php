@@ -27,6 +27,28 @@ function ar_pending(): string
     return 'سيتم إضافة المحتوى العربي هنا قريبًا.';
 }
 
+/** Absolute origin (scheme + host) for the current request, e.g. "https://example.com". */
+function site_origin(): string
+{
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+    return $scheme . ($_SERVER['HTTP_HOST'] ?? 'localhost');
+}
+
+/**
+ * Absolute URL of the site root (e.g. "https://example.com/" or, when
+ * deployed in a subfolder, "https://example.com/subfolder/"), resolved
+ * using the page's own $base prefix ('' at root, '../' one level deep, etc.)
+ * so it works the same whether the site lives at a domain root or not.
+ */
+function site_root_url(string $base): string
+{
+    $dir = dirname($_SERVER['SCRIPT_NAME'] ?? '/index.php');
+    for ($i = substr_count($base, '../'); $i > 0; $i--) {
+        $dir = dirname($dir);
+    }
+    return site_origin() . rtrim(str_replace('\\', '/', $dir), '/') . '/';
+}
+
 /** Builds the URL for the language switch links, preserving the current query string. */
 function lang_url(string $targetLang): string
 {

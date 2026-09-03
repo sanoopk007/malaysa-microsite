@@ -12,22 +12,31 @@ $pageDescription = $pageDescription ?? t(
     ar_pending()
 );
 $pageImage     = $pageImage ?? $base . 'assets/logos/visit-malaysia-colour.png';
-$scheme        = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
-$currentUrl    = $scheme . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/');
+$currentUrl    = site_origin() . ($_SERVER['REQUEST_URI'] ?? '/');
 $pageCanonical = $pageCanonical ?? strtok($currentUrl, '?');
+$pageRobots    = $pageRobots ?? null;
 ?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= htmlspecialchars($pageTitle) ?></title>
 <meta name="description" content="<?= htmlspecialchars($pageDescription) ?>">
+<?php if ($pageRobots): ?>
+<meta name="robots" content="<?= htmlspecialchars($pageRobots) ?>">
+<?php endif; ?>
 <link rel="canonical" href="<?= htmlspecialchars($pageCanonical) ?>">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="<?= htmlspecialchars($config['site_name']) ?>">
 <meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($pageDescription) ?>">
 <meta property="og:image" content="<?= htmlspecialchars($pageImage) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($pageCanonical) ?>">
+<meta property="og:locale" content="<?= $lang === 'ar' ? 'ar_AR' : 'en_US' ?>">
+<meta property="og:locale:alternate" content="<?= $lang === 'ar' ? 'en_US' : 'ar_AR' ?>">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($pageTitle) ?>">
+<meta name="twitter:description" content="<?= htmlspecialchars($pageDescription) ?>">
+<meta name="twitter:image" content="<?= htmlspecialchars($pageImage) ?>">
 
 <link rel="icon" href="<?= $base ?>favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="<?= $base ?>favicon-32x32.png">
@@ -35,6 +44,7 @@ $pageCanonical = $pageCanonical ?? strtok($currentUrl, '?');
 <link rel="apple-touch-icon" href="<?= $base ?>apple-touch-icon.png">
 <link rel="alternate" hreflang="en" href="<?= htmlspecialchars(strtok($currentUrl, '?')) ?>?lang=en">
 <link rel="alternate" hreflang="ar" href="<?= htmlspecialchars(strtok($currentUrl, '?')) ?>?lang=ar">
+<link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars(strtok($currentUrl, '?')) ?>?lang=en">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

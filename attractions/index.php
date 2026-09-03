@@ -3,8 +3,49 @@ require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/destination-data.php';
 
 $base = '../';
-$pageTitle = t('Attractions | Visit Malaysia 2026–2027', 'المعالم السياحية | زوروا ماليزيا 2026–2027');
-$pageDescription = t('The must-visit destinations across Malaysia, from Kuala Lumpur to Sabah.', ar_pending());
+$siteRoot = site_root_url($base);
+
+$pageTitle = t('Malaysia Attractions & Destinations | Khimji Travel', 'معالم ووجهات ماليزيا السياحية | خيمجي للسفر');
+$pageDescription = t(
+    'Discover Malaysia\'s must-visit destinations, from the towers of Kuala Lumpur to the rainforests of Sabah — 10 places to explore with Khimji Travel.',
+    'اكتشف أبرز الوجهات السياحية في ماليزيا، من أبراج كوالالمبور إلى غابات صباح المطيرة — 10 وجهات لاستكشافها مع خيمجي للسفر.'
+);
+$pageCanonical = $siteRoot . 'attractions/index.php';
+$pageImage = $siteRoot . 'assets/images/optimized/misc-attractions-hero.jpg';
+
+$destinationListItems = [];
+foreach ($destinations as $i => $d) {
+    $destinationListItems[] = [
+        '@type' => 'ListItem',
+        'position' => $i + 1,
+        'item' => [
+            '@type' => 'TouristDestination',
+            'name' => $d['title_en'],
+            'description' => $d['tagline_en'],
+            'url' => $siteRoot . 'attractions/' . $d['slug'] . '.php',
+            'image' => $siteRoot . $d['image'] . '.jpg',
+            'containedInPlace' => ['@type' => 'Country', 'name' => 'Malaysia'],
+        ],
+    ];
+}
+
+$pageSchema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => t('Home', 'الرئيسية'), 'item' => $siteRoot],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => t('Attractions', 'المعالم السياحية'), 'item' => $pageCanonical],
+            ],
+        ],
+        [
+            '@type' => 'ItemList',
+            'name' => 'Malaysia destinations featured on Visit Malaysia 2026–2027',
+            'itemListElement' => $destinationListItems,
+        ],
+    ],
+];
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" dir="<?= $dir ?>">

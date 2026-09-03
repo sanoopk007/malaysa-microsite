@@ -18,14 +18,39 @@ if (!$current) {
     exit;
 }
 
-$pageTitle = t($current['title_en'] . ' | Visit Malaysia 2026–2027', htmlspecialchars($current['title_ar']) . ' | زوروا ماليزيا 2026–2027');
-$pageDescription = t($current['tagline_en'] . ' — plan your Malaysia journey with Khimji Travel.', ar_pending());
-$pageImage = $base . $current['image'] . '.jpg';
+$siteRoot = site_root_url($base);
+
+$attractionNames = array_column($current['attractions'] ?? [], 'name');
+$attractionsPhrase = count($attractionNames) >= 2 ? $attractionNames[0] . ' and ' . $attractionNames[1] : ($attractionNames[0] ?? '');
+
+$pageTitle = t($current['title_en'] . ' Travel Guide | Khimji Travel', 'دليل السفر إلى ' . $current['title_ar'] . ' | خيمجي للسفر');
+$pageDescription = t(
+    trim($current['tagline_en'] . ($attractionsPhrase !== '' ? ' — discover ' . $attractionsPhrase . ' in ' . $current['title_en'] : ' in ' . $current['title_en']) . ' with Khimji Travel. Plan your Malaysia 2026–2027 trip today.'),
+    $current['tagline_ar'] . ' — خطط لرحلتك إلى ' . $current['title_ar'] . ' في ماليزيا 2026–2027 مع خيمجي للسفر.'
+);
+$pageCanonical = $siteRoot . 'attractions/' . $current['slug'] . '.php';
+$pageImage = $siteRoot . $current['image'] . '.jpg';
+
 $pageSchema = [
     '@context' => 'https://schema.org',
-    '@type' => 'TouristDestination',
-    'name' => $current['title_en'],
-    'description' => $current['tagline_en'],
+    '@graph' => [
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => t('Home', 'الرئيسية'), 'item' => $siteRoot],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => t('Attractions', 'المعالم السياحية'), 'item' => $siteRoot . 'attractions/index.php'],
+                ['@type' => 'ListItem', 'position' => 3, 'name' => t($current['title_en'], $current['title_ar']), 'item' => $pageCanonical],
+            ],
+        ],
+        [
+            '@type' => 'TouristDestination',
+            'name' => $current['title_en'],
+            'description' => $current['tagline_en'],
+            'url' => $pageCanonical,
+            'image' => $pageImage,
+            'containedInPlace' => ['@type' => 'Country', 'name' => 'Malaysia'],
+        ],
+    ],
 ];
 
 // Suggest 2 related packages that mention this destination by name.

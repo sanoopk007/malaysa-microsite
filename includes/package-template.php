@@ -17,15 +17,51 @@ if (!$current) {
     exit;
 }
 
-$pageTitle = t($current['title_en'] . ' | Visit Malaysia 2026–2027', 'زوروا ماليزيا 2026–2027');
-$pageDescription = t($current['intro_en'], ar_pending());
-$pageImage = $base . $current['image'] . '.jpg';
+$siteRoot = site_root_url($base);
+
+preg_match('/[\d,.]+/', $current['price_from'], $priceMatch);
+$priceValue = $priceMatch[0] ?? null;
+
+$pageTitle = t($current['title_en'] . ' Tour Package | Khimji Travel', 'باقة ' . $current['cities_ar'] . ' – ' . $current['duration_ar'] . ' | خيمجي للسفر');
+$pageDescription = t(
+    trim($current['intro_en']) . ' Book with Khimji Travel.',
+    'باقة سياحية إلى ' . $current['cities_ar'] . ' لمدة ' . $current['duration_ar'] . ' من خيمجي للسفر. خطط لرحلتك إلى ماليزيا 2026–2027 اليوم.'
+);
+$pageCanonical = $siteRoot . 'packages/' . $current['slug'] . '.php';
+$pageImage = $siteRoot . $current['image'] . '.jpg';
+
 $pageSchema = [
     '@context' => 'https://schema.org',
-    '@type' => 'TouristTrip',
-    'name' => $current['title_en'],
-    'description' => $current['intro_en'],
-    'touristType' => 'Leisure',
+    '@graph' => [
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => t('Home', 'الرئيسية'), 'item' => $siteRoot],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => t('Packages', 'الباقات'), 'item' => $siteRoot . 'packages/index.php'],
+                ['@type' => 'ListItem', 'position' => 3, 'name' => $current['title_en'], 'item' => $pageCanonical],
+            ],
+        ],
+        [
+            '@type' => 'TouristTrip',
+            'name' => $current['title_en'],
+            'description' => $current['intro_en'],
+            'touristType' => 'Leisure',
+            'url' => $pageCanonical,
+            'image' => $pageImage,
+            'provider' => [
+                '@type' => 'TravelAgency',
+                'name' => "Khimji's House of Travel",
+                'url' => $config['khimji_site'],
+            ],
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $priceValue,
+                'priceCurrency' => 'OMR',
+                'availability' => 'https://schema.org/InStock',
+                'url' => $pageCanonical,
+            ],
+        ],
+    ],
 ];
 ?>
 <!DOCTYPE html>

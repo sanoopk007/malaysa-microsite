@@ -4,8 +4,54 @@ require_once __DIR__ . '/../includes/destination-data.php';
 require_once __DIR__ . '/../includes/package-data.php';
 
 $base = '../';
-$pageTitle = t('Packages | Visit Malaysia 2026–2027', 'الباقات | زوروا ماليزيا 2026–2027');
-$pageDescription = t('Browse curated Malaysia tour packages by Khimji Travel.', ar_pending());
+$siteRoot = site_root_url($base);
+
+$pageTitle = t('Malaysia Tour Packages | Khimji Travel', 'باقات السفر إلى ماليزيا | خيمجي للسفر');
+$pageDescription = t(
+    'Browse curated Malaysia tour packages for 2026–2027 — city escapes, island retreats and family holidays, all arranged by Khimji Travel.',
+    'تصفح باقات السفر المنسقة إلى ماليزيا لعام 2026–2027 — من عطلات المدن إلى المنتجعات الجزرية والعطلات العائلية، مع خيمجي للسفر.'
+);
+$pageCanonical = $siteRoot . 'packages/index.php';
+$pageImage = $siteRoot . 'assets/images/optimized/misc-packages-hero.jpg';
+
+$packageListItems = [];
+foreach ($packages as $i => $p) {
+    preg_match('/[\d,.]+/', $p['price_from'], $priceMatch);
+    $packageListItems[] = [
+        '@type' => 'ListItem',
+        'position' => $i + 1,
+        'item' => [
+            '@type' => 'TouristTrip',
+            'name' => $p['title_en'],
+            'description' => $p['intro_en'],
+            'url' => $siteRoot . 'packages/' . $p['slug'] . '.php',
+            'image' => $siteRoot . $p['image'] . '.jpg',
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $priceMatch[0] ?? null,
+                'priceCurrency' => 'OMR',
+            ],
+        ],
+    ];
+}
+
+$pageSchema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => t('Home', 'الرئيسية'), 'item' => $siteRoot],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => t('Packages', 'الباقات'), 'item' => $pageCanonical],
+            ],
+        ],
+        [
+            '@type' => 'ItemList',
+            'name' => 'Malaysia tour packages by Khimji Travel',
+            'itemListElement' => $packageListItems,
+        ],
+    ],
+];
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" dir="<?= $dir ?>">

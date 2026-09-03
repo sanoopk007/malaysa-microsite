@@ -6,24 +6,53 @@ require_once __DIR__ . '/includes/experience-data.php';
 require_once __DIR__ . '/includes/offer-data.php';
 
 $base = '';
-$pageTitle = t('Visit Malaysia 2026–2027 | Khimji Travel', 'زوروا ماليزيا 2026–2027 | خيمجي للسفر');
+$siteRoot = site_root_url($base);
+
+$pageTitle = t('Visit Malaysia 2026–2027 Tour Packages | Khimji Travel', 'زوروا ماليزيا 2026–2027 | باقات سياحية من خيمجي للسفر');
 $pageDescription = t(
-    'Discover Malaysia\'s cities, islands, rainforests and culture with Visit Malaysia 2026–2027, in association with Khimji Travel. Explore destinations, curated packages and special offers.',
-    ar_pending()
+    'Plan your Malaysia trip for 2026–2027 with Khimji Travel. Browse top destinations, curated tour packages and exclusive hotel offers across Malaysia.',
+    'خطط لرحلتك إلى ماليزيا 2026–2027 مع خيمجي للسفر: استكشف أبرز الوجهات، باقات الرحلات المنسقة، وعروض الفنادق الحصرية في جميع أنحاء ماليزيا.'
 );
+$pageCanonical = $siteRoot;
+$pageImage = $siteRoot . 'assets/logos/visit-malaysia-colour.png';
+
+$destinationListItems = [];
+foreach ($destinations as $i => $d) {
+    $destinationListItems[] = [
+        '@type' => 'ListItem',
+        'position' => $i + 1,
+        'item' => [
+            '@type' => 'TouristDestination',
+            'name' => $d['title_en'],
+            'description' => $d['tagline_en'],
+            'url' => $siteRoot . 'attractions/' . $d['slug'] . '.php',
+            'image' => $siteRoot . $d['image'] . '.jpg',
+        ],
+    ];
+}
+
 $pageSchema = [
     '@context' => 'https://schema.org',
     '@graph' => [
         [
             '@type' => 'WebSite',
             'name' => 'Visit Malaysia 2026–2027',
-            'url' => $pageCanonical ?? '',
+            'url' => $siteRoot,
+            'inLanguage' => ['en', 'ar'],
         ],
         [
-            '@type' => 'Organization',
+            '@type' => 'TravelAgency',
             'name' => "Khimji's House of Travel",
             'url' => $config['khimji_site'],
-            'logo' => $config['khimji_site'] . '/img/logo.png',
+            'logo' => $siteRoot . 'assets/logos/khimji-logo-colour.png',
+            'image' => $siteRoot . 'assets/logos/khimji-logo-colour.png',
+            'email' => $config['contact_email'],
+            'telephone' => $config['contact_phone'],
+        ],
+        [
+            '@type' => 'ItemList',
+            'name' => 'Malaysia destinations featured on Visit Malaysia 2026–2027',
+            'itemListElement' => $destinationListItems,
         ],
     ],
 ];
@@ -83,6 +112,27 @@ $pageSchema = [
           ar_pending()
       ) ?></p>
       <a href="experiences.php" class="btn-premium btn-premium--dark" style="margin-top:1.5rem;"><?= t('Discover Experiences', 'اكتشف التجارب') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY MALAYSIA ================= -->
+<section class="why-malaysia section-pad">
+  <div class="why-malaysia__bg">
+    <?= picture('assets/images/optimized/misc-why-malaysia', '', 'loading="lazy" decoding="async" width="1920" height="1000"') ?>
+  </div>
+  <div class="container-fluid">
+    <div class="why-malaysia__content reveal">
+      <p class="eyebrow"><?= t('Why Malaysia', 'لماذا ماليزيا') ?></p>
+      <h2 style="font-size:clamp(2rem,3.6vw,3.2rem); margin-top:0.4em;"><?= t('A destination that rewards every kind of traveller', 'وجهة تكافئ كل نوع من المسافرين') ?></h2>
+      <ul class="why-malaysia__list">
+        <li><i class="bi bi-tsunami"></i> <span><?= t('Tropical islands and coastlines, from Langkawi to the Perhentians', ar_pending()) ?></span></li>
+        <li><i class="bi bi-cup-hot"></i> <span><?= t('World-class, multicultural cuisine in every city', ar_pending()) ?></span></li>
+        <li><i class="bi bi-tree"></i> <span><?= t('Some of the world\'s oldest rainforests, home to remarkable wildlife', ar_pending()) ?></span></li>
+        <li><i class="bi bi-buildings"></i> <span><?= t('Modern, connected cities alongside centuries of heritage', ar_pending()) ?></span></li>
+        <li><i class="bi bi-people"></i> <span><?= t('A multicultural spirit that welcomes every visitor', ar_pending()) ?></span></li>
+      </ul>
+      <a href="contact.php" class="btn-premium btn-premium--outline" style="margin-top:0.5rem;"><?= t('Start Planning Your Trip', 'ابدأ التخطيط لرحلتك') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
     </div>
   </div>
 </section>
@@ -213,27 +263,6 @@ $pageSchema = [
         </div>
       </div>
       <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<!-- ================= WHY MALAYSIA ================= -->
-<section class="why-malaysia section-pad">
-  <div class="why-malaysia__bg">
-    <?= picture('assets/images/optimized/misc-why-malaysia', '', 'loading="lazy" decoding="async" width="1920" height="1000"') ?>
-  </div>
-  <div class="container-fluid">
-    <div class="why-malaysia__content reveal">
-      <p class="eyebrow"><?= t('Why Malaysia', 'لماذا ماليزيا') ?></p>
-      <h2 style="font-size:clamp(2rem,3.6vw,3.2rem); margin-top:0.4em;"><?= t('A destination that rewards every kind of traveller', 'وجهة تكافئ كل نوع من المسافرين') ?></h2>
-      <ul class="why-malaysia__list">
-        <li><i class="bi bi-tsunami"></i> <span><?= t('Tropical islands and coastlines, from Langkawi to the Perhentians', ar_pending()) ?></span></li>
-        <li><i class="bi bi-cup-hot"></i> <span><?= t('World-class, multicultural cuisine in every city', ar_pending()) ?></span></li>
-        <li><i class="bi bi-tree"></i> <span><?= t('Some of the world\'s oldest rainforests, home to remarkable wildlife', ar_pending()) ?></span></li>
-        <li><i class="bi bi-buildings"></i> <span><?= t('Modern, connected cities alongside centuries of heritage', ar_pending()) ?></span></li>
-        <li><i class="bi bi-people"></i> <span><?= t('A multicultural spirit that welcomes every visitor', ar_pending()) ?></span></li>
-      </ul>
-      <a href="contact.php" class="btn-premium btn-premium--outline" style="margin-top:0.5rem;"><?= t('Start Planning Your Trip', 'ابدأ التخطيط لرحلتك') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
     </div>
   </div>
 </section>

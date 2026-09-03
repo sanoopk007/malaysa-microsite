@@ -4,8 +4,44 @@ require_once __DIR__ . '/includes/destination-data.php';
 require_once __DIR__ . '/includes/package-data.php';
 
 $base = '';
-$pageTitle = t('Contact Us | Visit Malaysia 2026–2027', 'اتصل بنا | زوروا ماليزيا 2026–2027');
-$pageDescription = t('Plan your Malaysia journey — send an enquiry to Khimji Travel.', ar_pending());
+$siteRoot = site_root_url($base);
+
+$pageTitle = t('Contact Khimji Travel | Plan Your Malaysia Trip', 'اتصل بخيمجي للسفر | خطط لرحلتك إلى ماليزيا');
+$pageDescription = t(
+    'Get in touch with Khimji Travel to plan your Malaysia 2026–2027 trip — ask about destinations, tour packages and special hotel offers.',
+    'تواصل مع خيمجي للسفر لتخطيط رحلتك إلى ماليزيا 2026–2027 — استفسر عن الوجهات وباقات الرحلات والعروض الخاصة.'
+);
+$pageCanonical = $siteRoot . 'contact.php';
+$pageImage = $siteRoot . 'assets/images/optimized/misc-contact-hero.jpg';
+
+$pageSchema = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                ['@type' => 'ListItem', 'position' => 1, 'name' => t('Home', 'الرئيسية'), 'item' => $siteRoot],
+                ['@type' => 'ListItem', 'position' => 2, 'name' => t('Contact Us', 'اتصل بنا'), 'item' => $pageCanonical],
+            ],
+        ],
+        [
+            '@type' => 'ContactPage',
+            'name' => $pageTitle,
+            'url' => $pageCanonical,
+            'about' => [
+                '@type' => 'TravelAgency',
+                'name' => "Khimji's House of Travel",
+                'url' => $config['khimji_site'],
+                'contactPoint' => [
+                    '@type' => 'ContactPoint',
+                    'telephone' => $config['contact_phone'],
+                    'email' => $config['contact_email'],
+                    'contactType' => 'customer service',
+                ],
+            ],
+        ],
+    ],
+];
 
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
