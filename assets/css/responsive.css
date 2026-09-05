@@ -74,8 +74,6 @@
 
   .dest-card { aspect-ratio: 4/5; }
 
-  .swiper-nav-group { display: none; }
-
   .package-card__highlights li { font-size: 0.7rem; }
 
   .final-cta { min-height: 50vh; text-align: center; }

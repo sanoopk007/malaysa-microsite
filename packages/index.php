@@ -6,9 +6,9 @@ require_once __DIR__ . '/../includes/package-data.php';
 $base = '../';
 $siteRoot = site_root_url($base);
 
-$pageTitle = t('Malaysia Tour Packages | Khimji Travel', 'باقات السفر إلى ماليزيا | خيمجي للسفر');
+$pageTitle = t('Malaysia Tour Packages | Khimji\'s House of Travel', 'باقات السفر إلى ماليزيا | خيمجي للسفر');
 $pageDescription = t(
-    'Browse curated Malaysia tour packages for 2026–2027 — city escapes, island retreats and family holidays, all arranged by Khimji Travel.',
+    'Browse curated Malaysia tour packages for 2026–2027 — city escapes, island retreats and family holidays, all arranged by Khimji\'s House of Travel.',
     'تصفح باقات السفر المنسقة إلى ماليزيا لعام 2026–2027 — من عطلات المدن إلى المنتجعات الجزرية والعطلات العائلية، مع خيمجي للسفر.'
 );
 $pageCanonical = $siteRoot . 'packages/index.php';
@@ -47,7 +47,7 @@ $pageSchema = [
         ],
         [
             '@type' => 'ItemList',
-            'name' => 'Malaysia tour packages by Khimji Travel',
+            'name' => 'Malaysia tour packages by Khimji\'s House of Travel',
             'itemListElement' => $packageListItems,
         ],
     ],
@@ -65,8 +65,7 @@ $pageSchema = [
   <div class="hero__media"><?= picture($base . 'assets/images/optimized/misc-packages-hero', '', 'width="1920" height="800" fetchpriority="high"') ?></div>
   <div class="hero__overlay"></div>
   <div class="container-fluid hero__content">
-    <p class="hero__eyebrow"><?= t('Curated Journeys', 'رحلات منسّقة') ?></p>
-    <h1 class="hero__title" style="font-size:clamp(2.4rem,5vw,4.5rem);"><?= t('Every itinerary, considered', 'كل برنامج رحلة، مدروس بعناية') ?></h1>
+    <h1 class="hero__title" style="font-size:clamp(2.4rem,5vw,4.5rem);"><?= t('Curated Journeys', 'رحلات منسّقة') ?></h1>
   </div>
 </section>
 

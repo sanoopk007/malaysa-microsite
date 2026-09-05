@@ -6,9 +6,9 @@ require_once __DIR__ . '/includes/package-data.php';
 $base = '';
 $siteRoot = site_root_url($base);
 
-$pageTitle = t('Contact Khimji Travel | Plan Your Malaysia Trip', 'اتصل بخيمجي للسفر | خطط لرحلتك إلى ماليزيا');
+$pageTitle = t('Contact Khimji\'s House of Travel | Plan Your Malaysia Trip', 'اتصل بخيمجي للسفر | خطط لرحلتك إلى ماليزيا');
 $pageDescription = t(
-    'Get in touch with Khimji Travel to plan your Malaysia 2026–2027 trip — ask about destinations, tour packages and special hotel offers.',
+    'Get in touch with Khimji\'s House of Travel to plan your Malaysia 2026–2027 trip — ask about destinations, tour packages and special hotel offers.',
     'تواصل مع خيمجي للسفر لتخطيط رحلتك إلى ماليزيا 2026–2027 — استفسر عن الوجهات وباقات الرحلات والعروض الخاصة.'
 );
 $pageCanonical = $siteRoot . 'contact.php';
@@ -68,7 +68,7 @@ $offerRef = $_GET['offer'] ?? '';
   <div class="container-fluid hero__content">
     <p class="hero__eyebrow"><?= t('Get In Touch', 'تواصل معنا') ?></p>
     <h1 class="hero__title" style="font-size:clamp(2.4rem,5vw,4.5rem);"><?= t('Plan your trip', 'خطط لرحلتك') ?></h1>
-    <p class="hero__sub"><?= t('Tell us what you have in mind — a Khimji Travel consultant will take it from there.', ar_pending()) ?></p>
+    <p class="hero__sub"><?= t('Tell us what you have in mind — a Khimji\'s House of Travel consultant will take it from there.', ar_pending()) ?></p>
   </div>
 </section>
 
@@ -80,7 +80,7 @@ $offerRef = $_GET['offer'] ?? '';
         <div class="reveal is-visible" style="background:var(--color-rainforest); color:#fff; border-radius:var(--radius-md); padding:2rem; margin-bottom:2rem; text-align:center;">
           <i class="bi bi-check-circle" style="font-size:2rem; color:var(--color-gold);"></i>
           <h2 style="margin-top:0.6rem; font-size:1.4rem; color:#fff;"><?= t('Thank you — your enquiry has been sent.', ar_pending()) ?></h2>
-          <p style="margin:0.5rem 0 0; opacity:0.9;"><?= t('A Khimji Travel consultant will be in touch shortly.', ar_pending()) ?></p>
+          <p style="margin:0.5rem 0 0; opacity:0.9;"><?= t('A Khimji\'s House of Travel consultant will be in touch shortly.', ar_pending()) ?></p>
         </div>
       <?php elseif ($formStatus === 'error'): ?>
         <div class="reveal is-visible" style="background:var(--color-hibiscus); color:#fff; border-radius:var(--radius-md); padding:1.5rem 2rem; margin-bottom:2rem;">

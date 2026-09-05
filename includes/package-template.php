@@ -22,9 +22,9 @@ $siteRoot = site_root_url($base);
 preg_match('/[\d,.]+/', $current['price_from'], $priceMatch);
 $priceValue = $priceMatch[0] ?? null;
 
-$pageTitle = t($current['title_en'] . ' Tour Package | Khimji Travel', 'باقة ' . $current['cities_ar'] . ' – ' . $current['duration_ar'] . ' | خيمجي للسفر');
+$pageTitle = t($current['title_en'] . ' Tour Package | Khimji\'s House of Travel', 'باقة ' . $current['cities_ar'] . ' – ' . $current['duration_ar'] . ' | خيمجي للسفر');
 $pageDescription = t(
-    trim($current['intro_en']) . ' Book with Khimji Travel.',
+    trim($current['intro_en']) . ' Book with Khimji\'s House of Travel.',
     'باقة سياحية إلى ' . $current['cities_ar'] . ' لمدة ' . $current['duration_ar'] . ' من خيمجي للسفر. خطط لرحلتك إلى ماليزيا 2026–2027 اليوم.'
 );
 $pageCanonical = $siteRoot . 'packages/' . $current['slug'] . '.php';
@@ -142,7 +142,7 @@ $pageSchema = [
 
       <div style="background:var(--color-sand); border-radius:var(--radius-md); padding:1.5rem; margin-top:3rem; font-size:0.9rem; color:var(--color-ink-soft);">
         <strong style="display:block; color:var(--color-rainforest-dark); margin-bottom:0.4em;"><?= t('Important Information', 'معلومات هامة') ?></strong>
-        <?= t('Prices are per person, subject to availability and travel dates. Final itinerary and pricing will be confirmed by Khimji Travel at the time of booking.', ar_pending()) ?>
+        <?= t('Prices are per person, subject to availability and travel dates. Final itinerary and pricing will be confirmed by Khimji\'s House of Travel at the time of booking.', ar_pending()) ?>
       </div>
     </div>
 

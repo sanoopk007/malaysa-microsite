@@ -8,7 +8,7 @@
 $base = $base ?? '';
 $pageTitle       = $pageTitle       ?? $config['site_name'];
 $pageDescription = $pageDescription ?? t(
-    'Visit Malaysia 2026–2027 in association with Khimji Travel — discover destinations, curated packages and unforgettable experiences across Malaysia.',
+    'Visit Malaysia 2026–2027 in association with Khimji\'s House of Travel — discover destinations, curated packages and unforgettable experiences across Malaysia.',
     ar_pending()
 );
 $pageImage     = $pageImage ?? $base . 'assets/logos/visit-malaysia-colour.png';

@@ -8,9 +8,9 @@ require_once __DIR__ . '/includes/offer-data.php';
 $base = '';
 $siteRoot = site_root_url($base);
 
-$pageTitle = t('Visit Malaysia 2026–2027 Tour Packages | Khimji Travel', 'زوروا ماليزيا 2026–2027 | باقات سياحية من خيمجي للسفر');
+$pageTitle = t('Visit Malaysia 2026–2027 Tour Packages | Khimji\'s House of Travel', 'زوروا ماليزيا 2026–2027 | باقات سياحية من خيمجي للسفر');
 $pageDescription = t(
-    'Plan your Malaysia trip for 2026–2027 with Khimji Travel. Browse top destinations, curated tour packages and exclusive hotel offers across Malaysia.',
+    'Plan your Malaysia trip for 2026–2027 with Khimji\'s House of Travel. Browse top destinations, curated tour packages and exclusive hotel offers across Malaysia.',
     'خطط لرحلتك إلى ماليزيا 2026–2027 مع خيمجي للسفر: استكشف أبرز الوجهات، باقات الرحلات المنسقة، وعروض الفنادق الحصرية في جميع أنحاء ماليزيا.'
 );
 $pageCanonical = $siteRoot;
@@ -81,11 +81,11 @@ $pageSchema = [
     <p class="hero__eyebrow"><?= t('Visit Malaysia 2026 – 2027', 'زوروا ماليزيا 2026 – 2027') ?></p>
     <h1 class="hero__title"><?= t('Truly <em>Asia</em>', 'آسيا <em>الحقيقية</em>') ?></h1>
     <p class="hero__sub"><?= t(
-        'Discover a world of culture, nature and unforgettable experiences — curated with Khimji Travel.',
+        'Discover a world of culture, nature and unforgettable experiences — curated with Khimji\'s House of Travel.',
         ar_pending()
     ) ?></p>
     <div class="hero__ctas">
-      <a href="#destinations" class="btn-premium btn-premium--solid"><?= t('Explore Malaysia', 'استكشف ماليزيا') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
+      <a href="attractions/index.php" class="btn-premium btn-premium--solid"><?= t('Explore Malaysia', 'استكشف ماليزيا') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
       <a href="#packages" class="btn-premium btn-premium--outline"><?= t('View Packages', 'عرض الباقات') ?></a>
     </div>
   </div>
@@ -108,7 +108,7 @@ $pageSchema = [
       <p class="eyebrow"><?= t('Welcome to Malaysia', 'مرحبًا بكم في ماليزيا') ?></p>
       <h2 class="intro__headline"><?= t('One destination.<br>Endless discoveries.', 'وجهة واحدة.<br>اكتشافات لا تنتهي.') ?></h2>
       <p class="intro__text"><?= t(
-          'Visit Malaysia 2026–2027 marks a special chapter for the nation — a celebration of its culture, heritage and unity brought to life for travellers everywhere. From the modern skyline of Kuala Lumpur to the ancient trails of Taman Negara, every corner tells a different story, brought closer with Khimji Travel.',
+          'Visit Malaysia 2026–2027 marks a special chapter for the nation — a celebration of its culture, heritage and unity brought to life for travellers everywhere. From the modern skyline of Kuala Lumpur to the ancient trails of Taman Negara, every corner tells a different story, brought closer with Khimji\'s House of Travel.',
           ar_pending()
       ) ?></p>
       <a href="experiences.php" class="btn-premium btn-premium--dark" style="margin-top:1.5rem;"><?= t('Discover Experiences', 'اكتشف التجارب') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
@@ -172,14 +172,16 @@ $pageSchema = [
         <div class="offer-card">
           <div class="offer-card__media">
             <?= picture($o['image'], t($o['hotel_en'], $o['hotel_ar']), 'loading="lazy" decoding="async" width="1000" height="700"') ?>
-            <span class="offer-card__tag"><?= htmlspecialchars(t($o['offer_en'], $o['offer_ar'])) ?></span>
+            <?php if (!empty($o['stars'])): ?>
+            <span class="offer-card__tag"><?= (int) $o['stars'] ?> <?= t('Star', 'نجوم') ?></span>
+            <?php endif; ?>
           </div>
           <div class="offer-card__body">
             <h3><?= htmlspecialchars(t($o['hotel_en'], $o['hotel_ar'])) ?></h3>
             <p class="offer-card__loc"><i class="bi bi-geo-alt"></i> <?= htmlspecialchars(t($o['location_en'], $o['location_ar'])) ?></p>
-            <p class="offer-card__rate"><?= htmlspecialchars(t($o['rate_en'], $o['rate_ar'])) ?></p>
-            <p class="offer-card__period"><?= htmlspecialchars(t($o['period_en'], $o['period_ar'])) ?></p>
-            <a href="contact.php?destination=<?= urlencode($o['location_en']) ?>&offer=<?= urlencode($o['hotel_en'] . ' — ' . $o['offer_en']) ?>" class="btn-premium btn-premium--dark" style="padding:0.7em 1.4em; font-size:0.85rem;"><?= t('Enquire Now', 'استفسر الآن') ?></a>
+            <p class="offer-card__rate"><?= t('From', 'من') ?> OMR <?= htmlspecialchars($o['rate_amount']) ?> / <?= htmlspecialchars(t($o['rate_unit_en'], $o['rate_unit_ar'])) ?></p>
+            <p class="offer-card__period"><?= htmlspecialchars(t($o['meal_plan_en'], $o['meal_plan_ar'])) ?></p>
+            <a href="contact.php?destination=<?= urlencode($o['location_en']) ?>&offer=<?= urlencode($o['hotel_en']) ?>" class="btn-premium btn-premium--dark" style="padding:0.7em 1.4em; font-size:0.85rem;"><?= t('Enquire Now', 'استفسر الآن') ?></a>
             <p class="offer-card__terms"><?= t('Terms and conditions apply.', 'تطبّق الشروط والأحكام.') ?></p>
           </div>
         </div>
@@ -211,48 +213,12 @@ $pageSchema = [
   </div>
 </section>
 
-<!-- ================= DESTINATIONS ================= -->
-<section class="destinations section-pad" id="destinations">
-  <div class="container-fluid">
-    <div class="section-head reveal">
-      <div class="section-head__text">
-        <p class="eyebrow"><?= t('Explore Malaysia', 'استكشف ماليزيا') ?></p>
-        <h2><?= t('Destinations worth discovering', 'وجهات تستحق الاكتشاف') ?></h2>
-      </div>
-      <div style="display:flex; align-items:center; gap:1.25rem;">
-        <a href="attractions/index.php" class="btn-premium btn-premium--dark"><?= t('View All Attractions', 'عرض جميع المعالم') ?></a>
-        <div class="swiper-nav-group">
-          <button class="swiper-nav-btn dest-prev" aria-label="<?= t('Previous', 'السابق') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'right' : 'left' ?>"></i></button>
-          <button class="swiper-nav-btn dest-next" aria-label="<?= t('Next', 'التالي') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper dest-swiper reveal">
-      <div class="swiper-wrapper">
-        <?php foreach ($destinations as $d): ?>
-        <div class="swiper-slide">
-          <a href="attractions/<?= $d['slug'] ?>.php" class="dest-card">
-            <?= picture($d['image'], t($d['title_en'], $d['title_ar']), 'loading="lazy" decoding="async" width="1600" height="1000"') ?>
-            <span class="dest-card__arrow"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'down-left' : 'down-right' ?>"></i></span>
-            <div class="dest-card__body">
-              <h3><?= htmlspecialchars(t($d['title_en'], $d['title_ar'])) ?></h3>
-              <p><?= htmlspecialchars(t($d['tagline_en'], $d['tagline_ar'])) ?></p>
-            </div>
-          </a>
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= FINAL CTA ================= -->
 <section class="final-cta">
   <div class="final-cta__bg"><?= picture('assets/images/optimized/misc-final-cta', '', 'loading="lazy" decoding="async" width="1920" height="1000"') ?></div>
   <div class="container-fluid final-cta__content reveal">
     <h2><?= t('Malaysia is calling.', 'ماليزيا تناديك.') ?></h2>
-    <p><?= t('Start your Malaysian journey with Khimji Travel.', ar_pending()) ?></p>
+    <p><?= t('Start your Malaysian journey with Khimji\'s House of Travel.', ar_pending()) ?></p>
     <div class="final-cta__ctas">
       <a href="packages/index.php" class="btn-premium btn-premium--solid"><?= t('Explore Packages', 'استكشف الباقات') ?></a>
       <a href="contact.php" class="btn-premium btn-premium--outline"><?= t('Contact Us', 'اتصل بنا') ?></a>

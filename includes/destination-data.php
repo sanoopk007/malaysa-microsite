@@ -5,9 +5,9 @@
  * drawer. Edit here once and it updates everywhere.
  *
  * 'attractions' and 'gallery' content is drawn from the destination research
- * supplied by Khimji Travel (D:\1\malaysia\attractions). Arabic translations
+ * supplied by Khimji's House of Travel (D:\1\malaysia\attractions). Arabic translations
  * for that longer-form copy have not been supplied yet and use ar_pending()
- * until Khimji Travel provides them.
+ * until Khimji's House of Travel provides them.
  */
 
 $destinations = [

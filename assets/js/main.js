@@ -207,28 +207,13 @@
   document.addEventListener('DOMContentLoaded', function () {
     if (typeof Swiper === 'undefined') return;
 
-    if (document.querySelector('.dest-swiper')) {
-      new Swiper('.dest-swiper', {
-        slidesPerView: 1.15,
-        spaceBetween: 18,
-        rtl: isRtl,
-        observer: true,
-        resizeObserver: true,
-        breakpoints: {
-          576: { slidesPerView: 2.2 },
-          992: { slidesPerView: 3.2 },
-          1400: { slidesPerView: 4 }
-        },
-        navigation: { nextEl: '.dest-next', prevEl: '.dest-prev' }
-      });
-    }
-
     document.querySelectorAll('.gallery-swiper').forEach(function (el) {
-      new Swiper(el, {
+      var gallerySwiper = new Swiper(el, {
         slidesPerView: 1.1,
         spaceBetween: 14,
         rtl: isRtl,
         observer: true,
+        observeParents: true,
         resizeObserver: true,
         breakpoints: { 768: { slidesPerView: 2.3 }, 1200: { slidesPerView: 3.2 } },
         navigation: {
@@ -236,6 +221,7 @@
           prevEl: el.parentElement.querySelector('.gallery-prev')
         }
       });
+      window.addEventListener('load', function () { gallerySwiper.update(); });
     });
 
     /* ---- Gallery lightbox ---- */

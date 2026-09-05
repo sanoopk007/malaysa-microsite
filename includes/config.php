@@ -81,7 +81,7 @@ $config = [
     'instagram'        => '#',
     'facebook'         => '#',
     'ebrochure_url'    => 'https://ebrochures.malaysia.travel/',
-    'contact_email'    => 'info@khimjistravel.com',
-    'contact_phone'    => '+968 2477 0000',
+    'contact_email'    => 'khot.holidays@kr.om',
+    'contact_phone'    => '+968 9928 0907',
     'khimji_site'      => 'https://www.khimjistravel.com',
 ];

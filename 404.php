@@ -3,7 +3,7 @@ require_once __DIR__ . '/includes/config.php';
 $base = '';
 $siteRoot = site_root_url($base);
 
-$pageTitle = t('Page Not Found | Khimji Travel', 'الصفحة غير موجودة | خيمجي للسفر');
+$pageTitle = t('Page Not Found | Khimji\'s House of Travel', 'الصفحة غير موجودة | خيمجي للسفر');
 $pageDescription = t(
     'The page you are looking for could not be found. Return to Visit Malaysia 2026–2027 to keep exploring.',
     'الصفحة التي تبحث عنها غير موجودة. عد إلى زوروا ماليزيا 2026–2027 لمتابعة الاستكشاف.'

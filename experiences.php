@@ -6,9 +6,9 @@ require_once __DIR__ . '/includes/experience-data.php';
 $base = '';
 $siteRoot = site_root_url($base);
 
-$pageTitle = t('Malaysia Travel Experiences | Khimji Travel', 'تجارب السفر في ماليزيا | خيمجي للسفر');
+$pageTitle = t('Malaysia Travel Experiences | Khimji\'s House of Travel', 'تجارب السفر في ماليزيا | خيمجي للسفر');
 $pageDescription = t(
-    'Explore Malaysia through nature, culture, food, adventure and more — eleven ways to experience the country, curated with Khimji Travel.',
+    'Explore Malaysia through nature, culture, food, adventure and more — eleven ways to experience the country, curated with Khimji\'s House of Travel.',
     'استكشف ماليزيا عبر الطبيعة والثقافة والطعام والمغامرة والمزيد — أحد عشر أسلوبًا لتجربة البلاد مع خيمجي للسفر.'
 );
 $pageCanonical = $siteRoot . 'experiences.php';
@@ -97,7 +97,7 @@ $pageSchema = [
   <div class="final-cta__bg"><?= picture('assets/images/optimized/misc-final-cta', '', 'loading="lazy" decoding="async" width="1920" height="1000"') ?></div>
   <div class="container-fluid final-cta__content reveal">
     <h2><?= t('Ready to choose your Malaysia?', 'هل أنت مستعد لاختيار ماليزيا الخاصة بك؟') ?></h2>
-    <p><?= t('Browse curated packages or talk to Khimji Travel about building your own.', ar_pending()) ?></p>
+    <p><?= t('Browse curated packages or talk to Khimji\'s House of Travel about building your own.', ar_pending()) ?></p>
     <div class="final-cta__ctas">
       <a href="packages/index.php" class="btn-premium btn-premium--solid"><?= t('Explore Packages', 'استكشف الباقات') ?></a>
       <a href="contact.php" class="btn-premium btn-premium--outline"><?= t('Contact Us', 'اتصل بنا') ?></a>

@@ -23,9 +23,9 @@ $siteRoot = site_root_url($base);
 $attractionNames = array_column($current['attractions'] ?? [], 'name');
 $attractionsPhrase = count($attractionNames) >= 2 ? $attractionNames[0] . ' and ' . $attractionNames[1] : ($attractionNames[0] ?? '');
 
-$pageTitle = t($current['title_en'] . ' Travel Guide | Khimji Travel', 'دليل السفر إلى ' . $current['title_ar'] . ' | خيمجي للسفر');
+$pageTitle = t($current['title_en'] . ' Travel Guide | Khimji\'s House of Travel', 'دليل السفر إلى ' . $current['title_ar'] . ' | خيمجي للسفر');
 $pageDescription = t(
-    trim($current['tagline_en'] . ($attractionsPhrase !== '' ? ' — discover ' . $attractionsPhrase . ' in ' . $current['title_en'] : ' in ' . $current['title_en']) . ' with Khimji Travel. Plan your Malaysia 2026–2027 trip today.'),
+    trim($current['tagline_en'] . ($attractionsPhrase !== '' ? ' — discover ' . $attractionsPhrase . ' in ' . $current['title_en'] : ' in ' . $current['title_en']) . ' with Khimji\'s House of Travel. Plan your Malaysia 2026–2027 trip today.'),
     $current['tagline_ar'] . ' — خطط لرحلتك إلى ' . $current['title_ar'] . ' في ماليزيا 2026–2027 مع خيمجي للسفر.'
 );
 $pageCanonical = $siteRoot . 'attractions/' . $current['slug'] . '.php';
@@ -100,7 +100,7 @@ $otherDestinations = array_slice($otherDestinations, 0, 3);
     <p class="eyebrow"><?= t('Overview', 'نظرة عامة') ?></p>
     <h2 class="intro__headline" style="font-size:clamp(1.8rem,3vw,2.6rem);"><?= t('Why visit ' . $current['title_en'], ar_pending()) ?></h2>
     <p class="intro__text" style="max-width:65ch;"><?= t(
-        $current['title_en'] . ' is one of Malaysia\'s most rewarding destinations — ' . strtolower($current['tagline_en']) . '. Here\'s where to start, curated with Khimji Travel.',
+        $current['title_en'] . ' is one of Malaysia\'s most rewarding destinations — ' . strtolower($current['tagline_en']) . '. Here\'s where to start, curated with Khimji\'s House of Travel.',
         ar_pending()
     ) ?></p>
   </div>

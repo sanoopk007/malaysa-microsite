@@ -5,9 +5,9 @@ require_once __DIR__ . '/../includes/destination-data.php';
 $base = '../';
 $siteRoot = site_root_url($base);
 
-$pageTitle = t('Malaysia Attractions & Destinations | Khimji Travel', 'معالم ووجهات ماليزيا السياحية | خيمجي للسفر');
+$pageTitle = t('Malaysia Attractions & Destinations | Khimji\'s House of Travel', 'معالم ووجهات ماليزيا السياحية | خيمجي للسفر');
 $pageDescription = t(
-    'Discover Malaysia\'s must-visit destinations, from the towers of Kuala Lumpur to the rainforests of Sabah — 10 places to explore with Khimji Travel.',
+    'Discover Malaysia\'s must-visit destinations, from the towers of Kuala Lumpur to the rainforests of Sabah — 10 places to explore with Khimji\'s House of Travel.',
     'اكتشف أبرز الوجهات السياحية في ماليزيا، من أبراج كوالالمبور إلى غابات صباح المطيرة — 10 وجهات لاستكشافها مع خيمجي للسفر.'
 );
 $pageCanonical = $siteRoot . 'attractions/index.php';
@@ -87,7 +87,7 @@ $pageSchema = [
   <div class="container-fluid">
     <div class="cta-banner reveal">
       <h2><?= t('Not sure where to start?', 'لست متأكدًا من أين تبدأ؟') ?></h2>
-      <p><?= t('Talk to a Khimji Travel consultant and we\'ll help you build the right Malaysia itinerary.', ar_pending()) ?></p>
+      <p><?= t('Talk to a Khimji\'s House of Travel consultant and we\'ll help you build the right Malaysia itinerary.', ar_pending()) ?></p>
       <a href="<?= $base ?>contact.php" class="btn-premium btn-premium--solid"><?= t('Contact Us', 'اتصل بنا') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
     </div>
   </div>

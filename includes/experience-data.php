@@ -53,7 +53,7 @@ $experiences = [
     ],
     [
         'slug' => 'luxury', 'title_en' => 'Luxury', 'title_ar' => ar_pending(),
-        'desc_en' => 'Private island resorts and five-star city stays, curated with Khimji Travel.',
+        'desc_en' => 'Private island resorts and five-star city stays, curated with Khimji\'s House of Travel.',
         'image' => 'assets/images/optimized/exp-luxury', 'destinations' => ['langkawi', 'kota-kinabalu'],
     ],
     [
