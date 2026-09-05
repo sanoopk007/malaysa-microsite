@@ -69,10 +69,10 @@ $pageSchema = [
 <section class="hero">
   <div class="hero__media">
     <picture>
-      <source media="(max-width: 768px)" srcset="assets/images/optimized/misc-hero-poster-mobile.webp" type="image/webp">
-      <source media="(max-width: 768px)" srcset="assets/images/optimized/misc-hero-poster-mobile.jpg">
+      <source media="(max-width: 768px)" srcset="assets/images/optimized/misc-hero-poster-mobile-640.webp 640w, assets/images/optimized/misc-hero-poster-mobile-960.webp 960w" sizes="100vw" type="image/webp">
+      <source media="(max-width: 768px)" srcset="assets/images/optimized/misc-hero-poster-mobile.jpg" type="image/jpeg">
       <source srcset="assets/images/optimized/misc-hero-poster.webp" type="image/webp">
-      <img src="assets/images/optimized/misc-hero-poster.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+      <img src="assets/images/optimized/misc-hero-poster.jpg" alt="<?= t('Performers in colourful traditional Malaysian costumes, including an ornate feathered headdress, posing together in front of a cultural pavilion surrounded by palm trees.', ar_pending()) ?>" width="1920" height="1080" fetchpriority="high">
     </picture>
     <video id="heroVideo" class="hero__video" muted loop playsinline aria-hidden="true" data-src="assets/video/malaysia-hero.mp4"></video>
   </div>
@@ -116,63 +116,6 @@ $pageSchema = [
   </div>
 </section>
 
-<!-- ================= WHY MALAYSIA ================= -->
-<section class="why-malaysia section-pad">
-  <div class="why-malaysia__bg">
-    <?= picture('assets/images/optimized/misc-why-malaysia', '', 'loading="lazy" decoding="async" width="1920" height="1000"') ?>
-  </div>
-  <div class="container-fluid">
-    <div class="why-malaysia__content reveal">
-      <p class="eyebrow"><?= t('Why Malaysia', 'لماذا ماليزيا') ?></p>
-      <h2 style="font-size:clamp(2rem,3.6vw,3.2rem); margin-top:0.4em;"><?= t('A destination that rewards every kind of traveller', 'وجهة تكافئ كل نوع من المسافرين') ?></h2>
-      <ul class="why-malaysia__list">
-        <li><i class="bi bi-tsunami"></i> <span><?= t('Tropical islands and coastlines, from Langkawi to the Perhentians', ar_pending()) ?></span></li>
-        <li><i class="bi bi-cup-hot"></i> <span><?= t('World-class, multicultural cuisine in every city', ar_pending()) ?></span></li>
-        <li><i class="bi bi-tree"></i> <span><?= t('Some of the world\'s oldest rainforests, home to remarkable wildlife', ar_pending()) ?></span></li>
-        <li><i class="bi bi-buildings"></i> <span><?= t('Modern, connected cities alongside centuries of heritage', ar_pending()) ?></span></li>
-        <li><i class="bi bi-people"></i> <span><?= t('A multicultural spirit that welcomes every visitor', ar_pending()) ?></span></li>
-      </ul>
-      <a href="contact.php" class="btn-premium btn-premium--outline" style="margin-top:0.5rem;"><?= t('Start Planning Your Trip', 'ابدأ التخطيط لرحلتك') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></a>
-    </div>
-  </div>
-</section>
-
-<!-- ================= DESTINATIONS ================= -->
-<section class="destinations section-pad" id="destinations">
-  <div class="container-fluid">
-    <div class="section-head reveal">
-      <div class="section-head__text">
-        <p class="eyebrow"><?= t('Explore Malaysia', 'استكشف ماليزيا') ?></p>
-        <h2><?= t('Destinations worth discovering', 'وجهات تستحق الاكتشاف') ?></h2>
-      </div>
-      <div style="display:flex; align-items:center; gap:1.25rem;">
-        <a href="attractions/index.php" class="btn-premium btn-premium--dark"><?= t('View All Attractions', 'عرض جميع المعالم') ?></a>
-        <div class="swiper-nav-group">
-          <button class="swiper-nav-btn dest-prev" aria-label="<?= t('Previous', 'السابق') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'right' : 'left' ?>"></i></button>
-          <button class="swiper-nav-btn dest-next" aria-label="<?= t('Next', 'التالي') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper dest-swiper reveal">
-      <div class="swiper-wrapper">
-        <?php foreach ($destinations as $d): ?>
-        <div class="swiper-slide">
-          <a href="attractions/<?= $d['slug'] ?>.php" class="dest-card">
-            <?= picture($d['image'], t($d['title_en'], $d['title_ar']), 'loading="lazy" decoding="async" width="1600" height="1000"') ?>
-            <span class="dest-card__arrow"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'down-left' : 'down-right' ?>"></i></span>
-            <div class="dest-card__body">
-              <h3><?= htmlspecialchars(t($d['title_en'], $d['title_ar'])) ?></h3>
-              <p><?= htmlspecialchars(t($d['tagline_en'], $d['tagline_ar'])) ?></p>
-            </div>
-          </a>
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= PACKAGES ================= -->
 <section class="packages section-pad" id="packages">
   <div class="container-fluid">
@@ -212,29 +155,7 @@ $pageSchema = [
   </div>
 </section>
 
-<!-- ================= EXPERIENCES TEASER ================= -->
-<section class="experiences-teaser section-pad">
-  <div class="container-fluid">
-    <div class="section-head reveal">
-      <div class="section-head__text">
-        <p class="eyebrow"><?= t('Experience Malaysia', 'جرّب ماليزيا') ?></p>
-        <h2><?= t('More than a destination', 'أكثر من مجرد وجهة') ?></h2>
-      </div>
-      <a href="experiences.php" class="btn-premium btn-premium--dark"><?= t('All Experiences', 'جميع التجارب') ?></a>
-    </div>
-
-    <div class="mosaic reveal">
-      <?php foreach ($experiences as $slug => $e): if (!in_array($e['slug'], $experience_teasers, true)) continue; ?>
-      <a href="experiences.php#<?= $e['slug'] ?>" class="mosaic-item">
-        <?= picture($e['image'], t($e['title_en'], $e['title_ar']), 'loading="lazy" decoding="async" width="1200" height="900"') ?>
-        <span class="mosaic-item__label"><?= htmlspecialchars(t($e['title_en'], $e['title_ar'])) ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'down-left' : 'down-right' ?>"></i></span>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SPECIAL OFFERS ================= -->
+<!-- ================= SPECIAL OFFERS (HOTELS) ================= -->
 <section class="offers section-pad">
   <div class="container-fluid">
     <div class="section-head reveal">
@@ -263,6 +184,64 @@ $pageSchema = [
         </div>
       </div>
       <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCES TEASER (MORE THAN A DESTINATION) ================= -->
+<section class="experiences-teaser section-pad">
+  <div class="container-fluid">
+    <div class="section-head reveal">
+      <div class="section-head__text">
+        <p class="eyebrow"><?= t('Experience Malaysia', 'جرّب ماليزيا') ?></p>
+        <h2><?= t('More than a destination', 'أكثر من مجرد وجهة') ?></h2>
+      </div>
+      <a href="experiences.php" class="btn-premium btn-premium--dark"><?= t('All Experiences', 'جميع التجارب') ?></a>
+    </div>
+
+    <div class="mosaic reveal">
+      <?php foreach ($experiences as $slug => $e): if (!in_array($e['slug'], $experience_teasers, true)) continue; ?>
+      <a href="experiences.php#<?= $e['slug'] ?>" class="mosaic-item">
+        <?= picture($e['image'], t($e['title_en'], $e['title_ar']), 'loading="lazy" decoding="async" width="1200" height="900"') ?>
+        <span class="mosaic-item__label"><?= htmlspecialchars(t($e['title_en'], $e['title_ar'])) ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'down-left' : 'down-right' ?>"></i></span>
+      </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESTINATIONS ================= -->
+<section class="destinations section-pad" id="destinations">
+  <div class="container-fluid">
+    <div class="section-head reveal">
+      <div class="section-head__text">
+        <p class="eyebrow"><?= t('Explore Malaysia', 'استكشف ماليزيا') ?></p>
+        <h2><?= t('Destinations worth discovering', 'وجهات تستحق الاكتشاف') ?></h2>
+      </div>
+      <div style="display:flex; align-items:center; gap:1.25rem;">
+        <a href="attractions/index.php" class="btn-premium btn-premium--dark"><?= t('View All Attractions', 'عرض جميع المعالم') ?></a>
+        <div class="swiper-nav-group">
+          <button class="swiper-nav-btn dest-prev" aria-label="<?= t('Previous', 'السابق') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'right' : 'left' ?>"></i></button>
+          <button class="swiper-nav-btn dest-next" aria-label="<?= t('Next', 'التالي') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper dest-swiper reveal">
+      <div class="swiper-wrapper">
+        <?php foreach ($destinations as $d): ?>
+        <div class="swiper-slide">
+          <a href="attractions/<?= $d['slug'] ?>.php" class="dest-card">
+            <?= picture($d['image'], t($d['title_en'], $d['title_ar']), 'loading="lazy" decoding="async" width="1600" height="1000"') ?>
+            <span class="dest-card__arrow"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'down-left' : 'down-right' ?>"></i></span>
+            <div class="dest-card__body">
+              <h3><?= htmlspecialchars(t($d['title_en'], $d['title_ar'])) ?></h3>
+              <p><?= htmlspecialchars(t($d['tagline_en'], $d['tagline_ar'])) ?></p>
+            </div>
+          </a>
+        </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>

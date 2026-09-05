@@ -130,6 +130,57 @@ $otherDestinations = array_slice($otherDestinations, 0, 3);
 </section>
 <?php endif; ?>
 
+<?php if (!empty($current['visitor_info_en'])): ?>
+<section class="section-pad" style="padding-top:0; padding-bottom:0;">
+  <div class="container-fluid">
+    <div style="background:var(--color-sand); border-radius:var(--radius-md); padding:1.5rem; font-size:0.95rem; color:var(--color-ink-soft); max-width:65ch;">
+      <strong style="display:block; color:var(--color-rainforest-dark); margin-bottom:0.4em;"><?= t('Visitor Information', 'معلومات للزوار') ?></strong>
+      <?= htmlspecialchars(t($current['visitor_info_en'], ar_pending())) ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<?php if (!empty($current['gallery'])): ?>
+<section class="section-pad" style="padding-top:0;">
+  <div class="container-fluid">
+    <div class="section-head reveal is-visible">
+      <div class="section-head__text">
+        <p class="eyebrow"><?= t('Gallery', 'معرض الصور') ?></p>
+        <h2><?= t('Scenes from ' . $current['title_en'], ar_pending()) ?></h2>
+      </div>
+      <?php if (count($current['gallery']) > 1): ?>
+      <div class="pkg-gallery-nav">
+        <button class="swiper-nav-btn gallery-prev" aria-label="<?= t('Previous', 'السابق') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'right' : 'left' ?>"></i></button>
+        <button class="swiper-nav-btn gallery-next" aria-label="<?= t('Next', 'التالي') ?>"><i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></button>
+      </div>
+      <?php endif; ?>
+    </div>
+    <div class="swiper gallery-swiper">
+      <div class="swiper-wrapper">
+        <?php foreach ($current['gallery'] as $g): $caption = t($g['caption_en'], ar_pending()); ?>
+        <div class="swiper-slide">
+          <button type="button" class="gallery-thumb" data-src="<?= htmlspecialchars($base . $g['image'] . '.jpg') ?>" data-caption="<?= htmlspecialchars($caption) ?>" aria-label="<?= t('Enlarge photo', 'تكبير الصورة') ?>: <?= htmlspecialchars($caption) ?>">
+            <?= picture($base . $g['image'], $caption, 'loading="lazy" decoding="async" width="900" height="675"') ?>
+            <span class="gallery-thumb__zoom"><i class="bi bi-arrows-fullscreen"></i></span>
+            <span class="gallery-thumb__caption"><?= htmlspecialchars($caption) ?></span>
+          </button>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="galleryLightbox" aria-hidden="true">
+  <button type="button" class="lightbox__close" id="lightboxClose" aria-label="<?= t('Close', 'إغلاق') ?>">&times;</button>
+  <figure class="lightbox__figure">
+    <img src="" alt="" id="lightboxImg">
+    <figcaption id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<?php endif; ?>
+
 <?php if (!empty($relatedPackages)): ?>
 <section class="packages section-pad" id="packages-for-destination" style="scroll-margin-top: calc(var(--header-h) + 1rem);">
   <div class="container-fluid">

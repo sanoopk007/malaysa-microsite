@@ -17,8 +17,7 @@ html[dir="rtl"] .hero__ctas,
 html[dir="rtl"] .final-cta__ctas { direction: rtl; }
 
 html[dir="rtl"] .package-card__footer,
-html[dir="rtl"] .dest-card__body,
-html[dir="rtl"] .why-malaysia__list li { direction: rtl; text-align: right; }
+html[dir="rtl"] .dest-card__body { direction: rtl; text-align: right; }
 
 html[dir="rtl"] .intro__collage-badge i { margin-inline-start: 0.2em; }
 

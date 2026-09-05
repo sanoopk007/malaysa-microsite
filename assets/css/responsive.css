@@ -44,8 +44,6 @@
   .site-footer__brand { grid-column: span 1; }
   .site-footer__bottom { flex-direction: column; text-align: center; }
 
-  .why-malaysia__content { max-width: 100%; }
-
   .attraction-list { grid-template-columns: 1fr; }
 }
 

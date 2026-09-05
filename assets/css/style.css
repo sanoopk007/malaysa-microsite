@@ -436,16 +436,6 @@ html[dir="rtl"] .offer-card__tag { left: auto; right: 1rem; }
 .offer-card__period { font-size: 0.78rem; color: var(--color-ink-soft); margin: 0.2em 0 0.9em; }
 .offer-card__terms { font-size: 0.7rem; color: #8b9088; margin-top: 0.6em; }
 
-/* ============================== WHY MALAYSIA ============================== */
-.why-malaysia { position: relative; color: var(--color-white); overflow: hidden; }
-.why-malaysia__bg { position: absolute; inset: 0; z-index: 0; }
-.why-malaysia__bg img { width: 100%; height: 100%; object-fit: cover; }
-.why-malaysia__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(16,19,31,0.92) 30%, rgba(16,19,31,0.5) 100%); }
-.why-malaysia__content { position: relative; z-index: 1; max-width: 620px; }
-.why-malaysia__list { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.1rem; }
-.why-malaysia__list li { display: flex; gap: 0.9rem; align-items: flex-start; font-size: 1.02rem; }
-.why-malaysia__list i { color: var(--color-gold); font-size: 1.2rem; margin-top: 0.15em; }
-
 /* ============================== INLINE CTA BANNER ============================== */
 .cta-banner { background: var(--gradient-tropical); border-radius: var(--radius-lg); padding: clamp(2.25rem, 5vw, 3.5rem); text-align: center; color: var(--color-white); }
 .cta-banner h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); margin-bottom: 0.5em; color: var(--color-white); }

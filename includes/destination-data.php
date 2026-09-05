@@ -4,9 +4,10 @@
  * the homepage destination showcase, /attractions/index.php and the mobile
  * drawer. Edit here once and it updates everywhere.
  *
- * 'attractions' is placeholder content — well-known sights for each area —
- * shown on the destination detail page until Khimji Travel supplies the
- * official curated list.
+ * 'attractions' and 'gallery' content is drawn from the destination research
+ * supplied by Khimji Travel (D:\1\malaysia\attractions). Arabic translations
+ * for that longer-form copy have not been supplied yet and use ar_pending()
+ * until Khimji Travel provides them.
  */
 
 $destinations = [
@@ -18,10 +19,19 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-kuala-lumpur',
         'attractions'  => [
-            ['name' => 'Petronas Twin Towers', 'desc' => 'The city\'s glittering skyline icon, with a sky bridge and observation deck.'],
-            ['name' => 'Batu Caves', 'desc' => 'A limestone hill temple reached by a colourful 272-step staircase.'],
-            ['name' => 'Merdeka Square', 'desc' => 'The historic heart of the city, framed by colonial-era architecture.'],
-            ['name' => 'Bukit Bintang', 'desc' => 'The buzzing shopping and nightlife district in the city centre.'],
+            ['name' => 'Kuala Lumpur City Centre (KLCC)', 'desc' => 'The Petronas Twin Towers, KLCC Park, Aquaria KLCC and upscale shopping at the heart of the city.'],
+            ['name' => 'Bukit Bintang', 'desc' => 'Pavilion KL, Jalan Alor\'s street food, nightlife and entertainment venues.'],
+            ['name' => 'Batu Caves', 'desc' => 'Limestone caves, Hindu shrines, the giant Murugan statue and 272 colourful steps, in nearby Gombak.'],
+            ['name' => 'Chinatown (Petaling Street)', 'desc' => 'Petaling Street Market, Central Market, temples and heritage shophouses.'],
+            ['name' => 'Merdeka Square and the Colonial District', 'desc' => 'Sultan Abdul Samad Building, Merdeka Square and the River of Life, beside the Klang River.'],
+            ['name' => 'Kampung Baru', 'desc' => 'Traditional Malay houses, local night dining and excellent skyline views, across the river from KLCC.'],
+            ['name' => 'Titiwangsa', 'desc' => 'Titiwangsa Lake Gardens, recreational activities and panoramic city views.'],
+            ['name' => 'Putrajaya', 'desc' => 'Putra Mosque, landscaped boulevards, striking government architecture and lake cruises, about 30km south of the city.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-kuala-lumpur-1', 'caption_en' => 'Batu Caves'],
+            ['image' => 'assets/images/optimized/gal-kuala-lumpur-2', 'caption_en' => 'River of Life, near Merdeka Square'],
+            ['image' => 'assets/images/optimized/gal-kuala-lumpur-3', 'caption_en' => 'Saloma Link Bridge, Kampung Baru'],
         ],
     ],
     [
@@ -32,10 +42,23 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-penang',
         'attractions'  => [
-            ['name' => 'George Town', 'desc' => 'A UNESCO World Heritage old town famous for street art and shophouses.'],
-            ['name' => 'Kek Lok Si Temple', 'desc' => 'One of Southeast Asia\'s largest Buddhist temple complexes.'],
-            ['name' => 'Penang Hill', 'desc' => 'A funicular ride up to cool viewpoints over the island.'],
-            ['name' => 'Gurney Drive Hawker Centre', 'desc' => 'A legendary seafront food destination for local specialities.'],
+            ['name' => 'George Town UNESCO World Heritage Site', 'desc' => 'A historic city district of multicultural shophouses, civic buildings, religious sites and living trades, inscribed by UNESCO in 2008.'],
+            ['name' => 'George Town Street Art', 'desc' => 'An outdoor collection of murals and steel-rod caricatures spread through the old city.'],
+            ['name' => 'Clan Jetties', 'desc' => 'Historic Chinese waterfront settlements built on stilts; Chew Jetty is the best-known and most visited.'],
+            ['name' => 'Khoo Kongsi', 'desc' => 'An ornate Chinese clan house and temple complex showcasing the heritage of the Khoo clan.'],
+            ['name' => 'Cheong Fatt Tze Mansion (The Blue Mansion)', 'desc' => 'A landmark indigo-blue Chinese courtyard mansion offering heritage tours and boutique accommodation.'],
+            ['name' => 'Fort Cornwallis', 'desc' => 'A star-shaped colonial fort marking the early British settlement of Penang.'],
+            ['name' => 'Penang Hill', 'desc' => 'A historic hill resort reached by funicular, with cool air, panoramic views, walking trails and heritage buildings.'],
+            ['name' => 'The Habitat Penang Hill', 'desc' => 'A rainforest discovery attraction with canopy walks, nature trails and elevated viewpoints.'],
+            ['name' => 'Kek Lok Si Temple', 'desc' => 'A vast Buddhist temple complex known for the Pagoda of Ten Thousand Buddhas and a large Kuan Yin statue.'],
+            ['name' => 'Penang Botanic Gardens', 'desc' => 'A historic tropical garden with landscaped grounds, rainforest edges, walking routes and macaques.'],
+            ['name' => 'Batu Ferringhi Beach', 'desc' => 'Penang\'s main resort beach, offering sunsets, beach recreation and commercial water sports.'],
+            ['name' => 'Entopia by Penang Butterfly Farm', 'desc' => 'A nature attraction centred on a large butterfly conservatory, insects and interactive learning exhibits.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-penang-1', 'caption_en' => 'George Town heritage trishaw'],
+            ['image' => 'assets/images/optimized/gal-penang-2', 'caption_en' => 'The Habitat Penang Hill'],
+            ['image' => 'assets/images/optimized/gal-penang-3', 'caption_en' => 'Penang Bridge'],
         ],
     ],
     [
@@ -46,10 +69,16 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-langkawi',
         'attractions'  => [
-            ['name' => 'Langkawi Sky Bridge', 'desc' => 'A curved pedestrian bridge suspended above the rainforest canopy.'],
-            ['name' => 'Langkawi Cable Car', 'desc' => 'A dramatic ride to the summit of Gunung Mat Cincang.'],
-            ['name' => 'Pulau Dayang Bunting', 'desc' => 'Home to the Lake of the Pregnant Maiden, a popular island-hopping stop.'],
-            ['name' => 'Pantai Cenang', 'desc' => 'The island\'s liveliest beach strip for sunsets and water sports.'],
+            ['name' => 'Langkawi Sky Bridge & SkyCab', 'desc' => 'Ride the cable car up Mount Mat Cincang and enjoy spectacular panoramic views from the iconic curved bridge.'],
+            ['name' => 'Kilim Karst Geoforest Park', 'desc' => 'Explore mangroves, limestone cliffs, caves and wildlife on a scenic boat tour through this UNESCO Global Geopark.'],
+            ['name' => 'Pantai Cenang Beach', 'desc' => 'Langkawi\'s liveliest beach, perfect for swimming, water sports, sunsets, restaurants and beachfront nightlife.'],
+            ['name' => 'Tanjung Rhu Beach', 'desc' => 'A beautiful, quieter beach known for its soft white sand, turquoise water and peaceful surroundings.'],
+            ['name' => 'Lake of the Pregnant Maiden (Dayang Bunting)', 'desc' => 'Visit the island\'s famous freshwater lake surrounded by lush hills, usually as part of an island-hopping trip.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-langkawi-1', 'caption_en' => 'Langkawi Sky Bridge & SkyCab'],
+            ['image' => 'assets/images/optimized/gal-langkawi-2', 'caption_en' => 'Pantai Cenang Beach'],
+            ['image' => 'assets/images/optimized/gal-langkawi-3', 'caption_en' => 'Tanjung Rhu Beach'],
         ],
     ],
     [
@@ -60,10 +89,21 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-malacca',
         'attractions'  => [
-            ['name' => 'Jonker Street', 'desc' => 'A lively heritage street known for antiques, food stalls and night markets.'],
-            ['name' => 'A Famosa', 'desc' => 'The remains of a 16th-century Portuguese fortress.'],
-            ['name' => 'Malacca River Cruise', 'desc' => 'A relaxed evening cruise past murals and riverside architecture.'],
-            ['name' => 'Christ Church Malacca', 'desc' => 'The iconic red Dutch-era church anchoring the city square.'],
+            ['name' => 'Jonker Walk', 'desc' => 'Heritage shops, cafés, street food and a lively weekend night market.'],
+            ['name' => 'Dutch Square', 'desc' => 'Melaka\'s iconic red colonial square, anchored by Christ Church and the Stadthuys.'],
+            ['name' => 'A\'Famosa and Porta de Santiago', 'desc' => 'The remains of a 16th-century Portuguese fortress.'],
+            ['name' => 'St Paul\'s Hill and Church', 'desc' => 'Historic ruins, tombstones and city views.'],
+            ['name' => 'Melaka River Cruise', 'desc' => 'A relaxed boat ride past murals, bridges and heritage riverside buildings.'],
+            ['name' => 'Melaka Straits Mosque', 'desc' => 'A photogenic waterfront mosque, especially beautiful at sunset.'],
+            ['name' => 'Baba & Nyonya Heritage Museum', 'desc' => 'A traditional Peranakan home displaying period furniture and artefacts.'],
+            ['name' => 'Cheng Hoon Teng Temple', 'desc' => 'Melaka\'s most significant historic Chinese temple.'],
+            ['name' => 'Menara Taming Sari', 'desc' => 'A rotating panoramic observation tower over the old town.'],
+            ['name' => 'Portuguese Settlement', 'desc' => 'Kristang culture, seafood and Portuguese Square.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-malacca-1', 'caption_en' => 'Melaka Straits Mosque'],
+            ['image' => 'assets/images/optimized/gal-malacca-2', 'caption_en' => 'Melaka River Cruise, with Christ Church behind'],
+            ['image' => 'assets/images/optimized/gal-malacca-3', 'caption_en' => 'Traditional kampung outside the old town'],
         ],
     ],
     [
@@ -74,11 +114,19 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-kota-kinabalu',
         'attractions'  => [
-            ['name' => 'Mount Kinabalu', 'desc' => 'Southeast Asia\'s highest peak and a UNESCO World Heritage Site.'],
-            ['name' => 'Tunku Abdul Rahman Marine Park', 'desc' => 'Five islands just offshore, perfect for snorkelling and day trips.'],
-            ['name' => 'Kota Kinabalu Waterfront', 'desc' => 'A lively promenade known for sunset views and seafood markets.'],
-            ['name' => 'Mari Mari Cultural Village', 'desc' => 'A living showcase of Sabah\'s indigenous tribal cultures.'],
+            ['name' => 'Tunku Abdul Rahman Marine Park', 'desc' => 'Island hopping, beaches, snorkelling and diving around Manukan, Sapi, Mamutik, Gaya and Sulug islands.'],
+            ['name' => 'Kota Kinabalu City Mosque', 'desc' => 'A striking waterfront mosque, popularly called the Floating Mosque.'],
+            ['name' => 'Mari Mari Cultural Village', 'desc' => 'Traditional homes, food, demonstrations and cultural performances representing Sabah\'s indigenous communities.'],
+            ['name' => 'Sabah State Museum and Heritage Village', 'desc' => 'Sabah\'s history, archaeology, natural history and traditional architecture.'],
+            ['name' => 'Gaya Street', 'desc' => 'Cafés, heritage buildings and the popular Sunday market.'],
+            ['name' => 'Kota Kinabalu Waterfront', 'desc' => 'Restaurants, nightlife and sunset views over the South China Sea.'],
+            ['name' => 'Atkinson Clock Tower', 'desc' => 'Kota Kinabalu\'s oldest surviving structure and an important city landmark.'],
+            ['name' => 'Kinabalu Park and Mount Kinabalu', 'desc' => 'Mountain scenery, botanical diversity and nature trails, about two hours from Kota Kinabalu.'],
         ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-kota-kinabalu-1', 'caption_en' => 'Mari Mari Cultural Village performance'],
+        ],
+        'visitor_info_en' => 'Kinabalu Park and Mount Kinabalu are approximately two hours from Kota Kinabalu by road and work best as a full-day trip.',
     ],
     [
         'slug'         => 'perhentian-islands',
@@ -88,10 +136,8 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-perhentian-islands',
         'attractions'  => [
-            ['name' => 'Long Beach (Pasir Panjang)', 'desc' => 'Powder-white sand and the island\'s liveliest beachfront.'],
-            ['name' => 'Turtle Beach', 'desc' => 'A protected cove where green turtles nest.'],
-            ['name' => 'Coral Bay Snorkelling', 'desc' => 'Shallow reefs teeming with colourful marine life just off the shore.'],
-            ['name' => 'Pulau Susu Dara', 'desc' => 'A quiet islet cove ideal for snorkelling day trips.'],
+            ['name' => 'Turtle Beach & Turtle Point', 'desc' => 'A beautiful, secluded area famous for crystal-clear waters, coral reefs and opportunities to spot green sea turtles.'],
+            ['name' => 'Long Beach, Perhentian Kecil', 'desc' => 'The island\'s most popular beach, offering white sand, turquoise water, water activities, restaurants and a lively evening atmosphere.'],
         ],
     ],
     [
@@ -102,10 +148,13 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-cameron-highlands',
         'attractions'  => [
-            ['name' => 'BOH Tea Plantation', 'desc' => 'Rolling green tea estates with tours and a hilltop teahouse.'],
-            ['name' => 'Mossy Forest', 'desc' => 'A cool, cloud-draped montane forest reached by boardwalk.'],
-            ['name' => 'Cameron Valley Strawberry Farm', 'desc' => 'A pick-your-own farm popular with families.'],
-            ['name' => 'Boh Sungai Palas Tea Centre', 'desc' => 'Panoramic terrace views over the plantation slopes.'],
+            ['name' => 'Mossy Forest', 'desc' => 'A misty, ancient cloud forest on Gunung Brinchang, filled with moss, ferns and unique highland flora.'],
+            ['name' => 'BOH Tea Plantation', 'desc' => 'Iconic rolling tea fields where you can enjoy panoramic views, freshly brewed tea and learn about tea production.'],
+            ['name' => 'Big Red Strawberry Farm', 'desc' => 'A popular farm where you can pick fresh strawberries, explore the gardens and enjoy strawberry-based treats.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-cameron-highlands-1', 'caption_en' => 'BOH Tea Plantation'],
+            ['image' => 'assets/images/optimized/gal-cameron-highlands-2', 'caption_en' => 'Mossy Forest boardwalk'],
         ],
     ],
     [
@@ -116,10 +165,14 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-kuching-bako',
         'attractions'  => [
-            ['name' => 'Bako National Park', 'desc' => 'Ancient rainforest trails home to proboscis monkeys and rare flora.'],
-            ['name' => 'Kuching Waterfront', 'desc' => 'A scenic riverside promenade lined with cafes and heritage buildings.'],
+            ['name' => 'Kuching Waterfront & Old Town', 'desc' => 'A scenic riverside area featuring historic shophouses, cultural landmarks, local markets and beautiful views of the Sarawak River.'],
+            ['name' => 'Bako National Park', 'desc' => 'Sarawak\'s oldest national park, famous for proboscis monkeys, rainforest trails, mangroves, secluded beaches and dramatic coastal rock formations.'],
             ['name' => 'Semenggoh Wildlife Centre', 'desc' => 'A rehabilitation sanctuary for semi-wild orangutans.'],
             ['name' => 'Sarawak Cultural Village', 'desc' => 'A living museum of Borneo\'s indigenous longhouses and traditions.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-kuching-bako-1', 'caption_en' => 'Proboscis monkeys, Bako National Park'],
+            ['image' => 'assets/images/optimized/gal-kuching-bako-2', 'caption_en' => 'Sarawak Cultural Village longhouse'],
         ],
     ],
     [
@@ -135,6 +188,9 @@ $destinations = [
             ['name' => 'Gua Telinga Cave', 'desc' => 'A guided cave trek home to bats and cave-dwelling wildlife.'],
             ['name' => 'Tahan River Cruise', 'desc' => 'A boat journey through dense rainforest along the Tembeling River.'],
         ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-taman-negara-1', 'caption_en' => 'Rainforest canopy walkway'],
+        ],
     ],
     [
         'slug'         => 'sabah',
@@ -144,10 +200,16 @@ $destinations = [
         'tagline_ar'   => ar_pending(),
         'image'        => 'assets/images/optimized/dest-sabah',
         'attractions'  => [
+            ['name' => 'Mount Kinabalu & Kinabalu Park', 'desc' => 'Sabah\'s iconic mountain and UNESCO World Heritage Site, offering spectacular scenery, hiking and rich highland biodiversity.'],
             ['name' => 'Sepilok Orangutan Rehabilitation Centre', 'desc' => 'A renowned sanctuary caring for orphaned orangutans.'],
             ['name' => 'Kinabatangan River', 'desc' => 'A wildlife-rich river cruise through Borneo\'s rainforest.'],
             ['name' => 'Sipadan Island', 'desc' => 'World-class diving among turtles and coral walls.'],
             ['name' => 'Klias Wetlands', 'desc' => 'Mangrove river cruises known for proboscis monkeys and fireflies.'],
+        ],
+        'gallery' => [
+            ['image' => 'assets/images/optimized/gal-sabah-1', 'caption_en' => 'Climbers near the summit of Mount Kinabalu'],
+            ['image' => 'assets/images/optimized/gal-sabah-2', 'caption_en' => 'Diving off Sipadan Island'],
+            ['image' => 'assets/images/optimized/gal-sabah-3', 'caption_en' => 'Orangutan, Sepilok Rehabilitation Centre'],
         ],
     ],
 ];
