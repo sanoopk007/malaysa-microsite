@@ -43,6 +43,14 @@
   --header-h: 112px;
 
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Brand-derived section tints — subtle backgrounds for section-to-section
+     differentiation. Falls back gracefully (see each section rule) in
+     browsers without color-mix() support. */
+  --tint-teal-1: color-mix(in srgb, var(--color-teal) 5%, var(--color-white));
+  --tint-teal-2: color-mix(in srgb, var(--color-teal) 11%, var(--color-white));
+  --tint-gold-1: color-mix(in srgb, var(--color-gold) 8%, var(--color-sand));
+  --tint-gold-2: color-mix(in srgb, var(--color-gold) 3%, var(--color-white));
 }
 
 html[dir="rtl"] {
@@ -104,6 +112,7 @@ html[dir="rtl"] .eyebrow::after { content: ''; width: 28px; height: 2px; backgro
 .section-pad { padding-block: clamp(3.5rem, 8vw, 7rem); }
 
 .btn-premium {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
@@ -113,21 +122,58 @@ html[dir="rtl"] .eyebrow::after { content: ''; width: 28px; height: 2px; backgro
   font-size: 0.95rem;
   letter-spacing: 0.3px;
   border: 1.5px solid transparent;
+  overflow: hidden;
   transition: transform 0.35s var(--ease-premium), background 0.3s, color 0.3s, border-color 0.3s;
 }
-.btn-premium i { transition: transform 0.35s var(--ease-premium); }
+.btn-premium i { position: relative; z-index: 1; transition: transform 0.35s var(--ease-premium); }
 .btn-premium:hover { transform: translateY(-2px); }
 .btn-premium:hover i { transform: translateX(4px); }
 html[dir="rtl"] .btn-premium:hover i { transform: translateX(-4px) scaleX(-1); }
 
+/* Solid — soft diagonal light sweep on hover, on top of the existing colour shift. */
 .btn-premium--solid { background: var(--color-white); color: var(--color-rainforest-dark); }
 .btn-premium--solid:hover { background: var(--color-gold); color: var(--color-ink); }
+.btn-premium--solid::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; inset-inline-start: -60%;
+  width: 45%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.65), transparent);
+  transform: skewX(-18deg);
+  transition: inset-inline-start 0.7s var(--ease-premium);
+  pointer-events: none;
+}
+.btn-premium--solid:hover::before { inset-inline-start: 130%; }
 
-.btn-premium--outline { border-color: rgba(255,255,255,0.6); color: var(--color-white); }
+/* Outline — cursor-following spotlight highlight (desktop pointer only; see main.js). */
+.btn-premium--outline {
+  border-color: rgba(255,255,255,0.6); color: var(--color-white);
+  --spot-x: 50%; --spot-y: 50%;
+}
 .btn-premium--outline:hover { border-color: var(--color-white); background: rgba(255,255,255,0.12); }
+.btn-premium--outline::after {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(140px circle at var(--spot-x) var(--spot-y), rgba(255,255,255,0.35), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-premium--outline:hover::after { opacity: 1; }
+}
 
+/* Dark — liquid-fill: the new colour grows from the centre rather than
+   snapping in, an organic "liquid morph" reveal built from a single
+   transform (GPU-friendly, no width/height/top/left animated). */
 .btn-premium--dark { background: var(--color-rainforest-dark); color: var(--color-white); }
-.btn-premium--dark:hover { background: var(--color-hibiscus); }
+.btn-premium--dark::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: inherit;
+  background: var(--color-hibiscus);
+  transform: scale(0);
+  transition: transform 0.55s var(--ease-premium);
+}
+.btn-premium--dark:hover::before { transform: scale(1.15); }
 
 /* ============================== HEADER ============================== */
 .site-header {
@@ -330,7 +376,7 @@ html[dir="rtl"] .mobile-drawer__sub { padding: 0 1rem 0 0; }
 @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
 
 /* ============================== INTRO ============================== */
-.intro { background: var(--color-sand); }
+.intro { background: var(--color-white); }
 .intro__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
 .intro__headline { font-size: clamp(2rem, 3.6vw, 3.4rem); margin: 0.4em 0 0.7em; color: var(--color-rainforest-dark); }
 .intro__text { color: var(--color-ink-soft); font-size: 1.05rem; max-width: 46ch; }
@@ -355,7 +401,7 @@ html[dir="rtl"] .intro__collage-badge { left: auto; right: -1.25rem; }
 .intro__collage-badge i { font-size: 1.6rem; color: var(--color-hibiscus); }
 
 /* ============================== DESTINATIONS ============================== */
-.destinations { background: var(--color-white); }
+.destinations { background: var(--color-sand); }
 .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: clamp(2rem, 4vw, 3.5rem); flex-wrap: wrap; }
 .section-head h2 { font-size: clamp(2rem, 3.4vw, 3rem); color: var(--color-rainforest-dark); margin-top: 0.3em; }
 .section-head__text { max-width: 640px; }
@@ -382,17 +428,83 @@ html[dir="rtl"] .dest-card__arrow { right: auto; left: 1.25rem; }
 .swiper-nav-group { display: flex; gap: 0.75rem; }
 
 /* ============================== PACKAGES ============================== */
-.packages { background: var(--color-sand); }
+/* Featured section: this is the first "premium" stop after the intro, so it
+   gets its own soft brand-tinted identity (subtle teal gradient + a single
+   slow-morphing decorative blob + an oversized faint watermark) rather than
+   sharing a plain background with its neighbours. */
+.packages {
+  position: relative;
+  background: var(--color-sand);
+  background: linear-gradient(180deg, var(--tint-teal-1) 0%, var(--tint-teal-2) 100%);
+  overflow: hidden;
+}
+.packages::before {
+  content: '';
+  position: absolute;
+  top: -16%; inset-inline-end: -12%;
+  width: min(620px, 58vw); height: min(620px, 58vw);
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-teal) 20%, transparent) 0%, transparent 70%);
+  border-radius: 44% 56% 62% 38% / 42% 45% 55% 58%;
+  animation: blobMorph 24s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.packages > .container-fluid { position: relative; z-index: 1; }
+.packages__watermark {
+  position: absolute; top: -0.1em; inset-inline-end: clamp(0.5rem, 3vw, 2rem);
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: clamp(2.75rem, 12vw, 11rem); line-height: 1;
+  color: color-mix(in srgb, var(--color-rainforest) 7%, transparent);
+  pointer-events: none; z-index: 0; user-select: none; white-space: nowrap;
+}
+@keyframes blobMorph {
+  0%, 100% { border-radius: 44% 56% 62% 38% / 42% 45% 55% 58%; transform: scale(1); }
+  50%      { border-radius: 58% 42% 40% 60% / 55% 60% 40% 45%; transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .packages::before { animation: none; }
+}
 .package-card {
+  --lift: 0px; --tilt-x: 0deg; --tilt-y: 0deg; --mx: 50%; --my: 50%;
+  position: relative;
   background: var(--color-white); border-radius: var(--radius-lg); overflow: hidden;
   box-shadow: 0 10px 30px rgba(16,19,31,0.06);
-  transition: transform 0.45s var(--ease-premium), box-shadow 0.45s var(--ease-premium);
+  transform: perspective(1400px) translateY(var(--lift)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium);
   height: 100%; display: flex; flex-direction: column;
+  will-change: transform;
 }
-.package-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(16,19,31,0.14); }
+.package-card:hover { --lift: -8px; box-shadow: 0 30px 60px rgba(16,19,31,0.14); }
 .package-card__media { position: relative; aspect-ratio: 4/3; overflow: hidden; }
-.package-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-premium); }
-.package-card:hover .package-card__media img { transform: scale(1.06); }
+/* Soft, brand-derived sheen that follows the cursor — a restrained nod to a
+   holographic highlight using only existing gold/teal brand colours, not a
+   rainbow gaming effect. Scoped to the photo only (not the card body), so it
+   never washes out the text/price below the image. Mouse-driven, so it only
+   ever appears on devices with a real pointer (see main.js) and never
+   intercepts clicks/taps. */
+.package-card__media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(220px circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--color-gold) 28%, transparent) 0%,
+    color-mix(in srgb, var(--color-teal) 16%, transparent) 38%,
+    transparent 72%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
+}
+@media (hover: hover) and (pointer: fine) {
+  .package-card:hover .package-card__media::after { opacity: 0.6; }
+}
+.package-card__media img {
+  --img-x: 0px; --img-y: 0px; --img-scale: 1;
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(var(--img-scale)) translate(var(--img-x), var(--img-y));
+  transition: transform 0.6s var(--ease-premium);
+}
+.package-card:hover .package-card__media img { --img-scale: 1.06; }
 .package-card__duration { position: absolute; top: 1rem; left: 1rem; background: rgba(255,255,255,0.92); backdrop-filter: blur(4px); padding: 0.4em 0.9em; border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--color-rainforest-dark); }
 html[dir="rtl"] .package-card__duration { left: auto; right: 1rem; }
 .package-card__body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
@@ -409,24 +521,33 @@ html[dir="rtl"] .package-card__duration { left: auto; right: 1rem; }
 html[dir="rtl"] .package-card:hover .package-card__link i { transform: translateX(-4px) scaleX(-1); }
 
 /* ============================== EXPERIENCES MOSAIC ============================== */
-.experiences-teaser { background: var(--color-white); }
+/* Editorial treatment: a warm gold-tinted gradient (distinct from the cool
+   teal tint used on Packages above) plus more generous vertical rhythm, so
+   this reads as a richer storytelling moment between two plain-white
+   sections (Hotels above, Destinations below). */
+.experiences-teaser {
+  background: var(--color-sand);
+  background: linear-gradient(165deg, var(--tint-gold-2) 0%, var(--tint-gold-1) 55%, var(--tint-gold-2) 100%);
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+}
 /* 1 large feature + a 2x2 grid of smaller items — 4 cols x 2 rows = 8 cells,
    exactly matching 1 item spanning 2x2 (4 cells) + 4 items spanning 1x1 each
    (4 cells), so the grid always tiles with no leftover gaps. */
 .mosaic { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 1rem; }
 .mosaic-item { position: relative; border-radius: var(--radius-md); overflow: hidden; }
 .mosaic-item:first-child { grid-column: span 2; grid-row: span 2; }
-.mosaic-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-premium); }
-.mosaic-item:hover img { transform: scale(1.08); }
+.mosaic-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-premium), filter 0.5s ease; }
+.mosaic-item:hover img { transform: scale(1.07); filter: brightness(1.04) saturate(1.08); }
 .mosaic-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,19,31,0) 45%, rgba(16,19,31,0.8) 100%); }
 .mosaic-item__label { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.1rem; z-index: 2; color: var(--color-white); font-family: var(--font-heading); font-weight: 600; font-size: 1.05rem; display: flex; align-items: center; justify-content: space-between; }
 
 /* ============================== OFFERS ============================== */
-.offers { background: var(--color-sand); }
-.offer-card { background: var(--color-white); border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 10px 26px rgba(16,19,31,0.06); transition: transform 0.4s var(--ease-premium); height: 100%; }
-.offer-card:hover { transform: translateY(-6px); }
+.offers { background: var(--color-white); }
+.offer-card { background: var(--color-white); border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 10px 26px rgba(16,19,31,0.06); transition: transform 0.5s var(--ease-premium), box-shadow 0.5s var(--ease-premium); height: 100%; }
+.offer-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(16,19,31,0.12); }
 .offer-card__media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
-.offer-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.offer-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-premium); }
+.offer-card:hover .offer-card__media img { transform: scale(1.05); }
 .offer-card__tag { position: absolute; top: 1rem; left: 1rem; background: var(--color-hibiscus); color: var(--color-white); font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 0.4em 0.85em; border-radius: 100px; }
 html[dir="rtl"] .offer-card__tag { left: auto; right: 1rem; }
 .offer-card__body { padding: 1.25rem 1.4rem 1.5rem; }
@@ -469,6 +590,11 @@ html[dir="rtl"] .offer-card__tag { left: auto; right: 1rem; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 .reveal-stagger.is-visible > * { transition-delay: calc(var(--stagger-i, 0) * 90ms); }
 
+/* Section headings get an extra clip-path "mask wipe" layered on top of the
+   fade + rise above, for a calmer, more editorial entrance than a plain fade. */
+.section-head.reveal h2 { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s var(--ease-premium) 0.15s; }
+.section-head.reveal.is-visible h2 { clip-path: inset(0 0 0 0); }
+
 /* ============================== EXPERIENCES STORY (experiences.php) ============================== */
 .exp-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; padding-block: clamp(2.5rem, 6vw, 5rem); scroll-margin-top: calc(var(--header-h) + 1rem); }
 .exp-row:not(:last-child) { border-bottom: 1px solid var(--color-sand-deep); }
@@ -485,8 +611,20 @@ html[dir="rtl"] .offer-card__tag { left: auto; right: 1rem; }
 
 /* ============================== ATTRACTION LIST (destination detail) ============================== */
 .attraction-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-.attraction-list__item { display: flex; gap: 1.25rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-md); box-shadow: 0 10px 26px rgba(16,19,31,0.05); }
-.attraction-list__num { font-family: var(--font-heading); font-weight: 700; font-size: 1.6rem; color: var(--color-gold-dark); opacity: 0.7; flex-shrink: 0; }
+.attraction-list__item {
+  display: flex; gap: 1.25rem; padding: 1.5rem;
+  background: var(--color-white); border-radius: var(--radius-md);
+  box-shadow: 0 10px 26px rgba(16,19,31,0.05);
+  border: 1.5px solid transparent;
+  transition: transform 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium), border-color 0.4s ease;
+}
+.attraction-list__item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(16,19,31,0.1);
+  border-color: color-mix(in srgb, var(--color-gold) 45%, transparent);
+}
+.attraction-list__num { font-family: var(--font-heading); font-weight: 700; font-size: 1.6rem; color: var(--color-gold-dark); opacity: 0.7; flex-shrink: 0; transition: color 0.35s ease, opacity 0.35s ease; }
+.attraction-list__item:hover .attraction-list__num { color: var(--color-hibiscus); opacity: 1; }
 .attraction-list__item h3 { font-size: 1.05rem; color: var(--color-rainforest-dark); margin-bottom: 0.35em; }
 .attraction-list__item p { margin: 0; font-size: 0.92rem; color: var(--color-ink-soft); }
 

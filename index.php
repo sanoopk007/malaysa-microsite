@@ -118,6 +118,7 @@ $pageSchema = [
 
 <!-- ================= PACKAGES ================= -->
 <section class="packages section-pad" id="packages">
+  <span class="packages__watermark" aria-hidden="true"><?= t('Packages', 'باقات') ?></span>
   <div class="container-fluid">
     <div class="section-head reveal">
       <div class="section-head__text">

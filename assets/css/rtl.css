@@ -25,3 +25,7 @@ html[dir="rtl"] .site-footer__col,
 html[dir="rtl"] .site-footer__bottom { text-align: right; }
 
 html[dir="rtl"] .mega-menu__item:hover { padding-inline-start: 0.9em; padding-inline-end: 1.2em; }
+
+/* Heading mask-wipe should read start-to-end in RTL too (right-to-left). */
+html[dir="rtl"] .section-head.reveal h2 { clip-path: inset(0 0 0 100%); }
+html[dir="rtl"] .section-head.reveal.is-visible h2 { clip-path: inset(0 0 0 0); }

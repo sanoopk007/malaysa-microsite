@@ -138,8 +138,60 @@
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* ---- Final CTA subtle parallax (skipped for reduced motion) ---- */
+  /* ---- Premium cursor-aware interactions ----
+     Only attached on devices with a real pointer and no reduced-motion
+     preference, so touch/mobile and motion-sensitive users never pay the
+     (tiny) per-frame cost and never get a stuck "hover" from a tap. */
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (supportsFinePointer && !prefersReduced) {
+    document.querySelectorAll('.package-card').forEach(function (card) {
+      var media = card.querySelector('.package-card__media');
+      var raf = null;
+      var lastEvent = null;
+      function applyTilt() {
+        var rect = card.getBoundingClientRect();
+        var px = (lastEvent.clientX - rect.left) / rect.width;
+        var py = (lastEvent.clientY - rect.top) / rect.height;
+        card.style.setProperty('--tilt-y', ((px - 0.5) * 5).toFixed(2) + 'deg');
+        card.style.setProperty('--tilt-x', ((0.5 - py) * 5).toFixed(2) + 'deg');
+        if (media) {
+          var mrect = media.getBoundingClientRect();
+          var mx = (lastEvent.clientX - mrect.left) / mrect.width;
+          var my = (lastEvent.clientY - mrect.top) / mrect.height;
+          media.style.setProperty('--mx', (mx * 100).toFixed(1) + '%');
+          media.style.setProperty('--my', (my * 100).toFixed(1) + '%');
+        }
+        var img = card.querySelector('.package-card__media img');
+        if (img) {
+          img.style.setProperty('--img-x', ((0.5 - px) * 8).toFixed(1) + 'px');
+          img.style.setProperty('--img-y', ((0.5 - py) * 8).toFixed(1) + 'px');
+        }
+        raf = null;
+      }
+      card.addEventListener('mousemove', function (e) {
+        lastEvent = e;
+        if (!raf) raf = requestAnimationFrame(applyTilt);
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+        var img = card.querySelector('.package-card__media img');
+        if (img) { img.style.setProperty('--img-x', '0px'); img.style.setProperty('--img-y', '0px'); }
+      });
+    });
+
+    document.querySelectorAll('.btn-premium--outline').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        btn.style.setProperty('--spot-x', (((e.clientX - rect.left) / rect.width) * 100).toFixed(1) + '%');
+        btn.style.setProperty('--spot-y', (((e.clientY - rect.top) / rect.height) * 100).toFixed(1) + '%');
+      });
+    });
+  }
+
+  /* ---- Final CTA subtle parallax (skipped for reduced motion) ---- */
   var ctaBg = document.querySelector('.final-cta__bg');
   if (ctaBg && !prefersReduced) {
     window.addEventListener('scroll', function () {
