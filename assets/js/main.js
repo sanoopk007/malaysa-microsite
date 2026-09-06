@@ -263,4 +263,17 @@
       });
     }
   });
+
+  /* ---- Enquiry form: loading state, prevents double-submit ---- */
+  var enquiryForm = document.querySelector('form[action="includes/send-enquiry.php"]');
+  if (enquiryForm) {
+    enquiryForm.addEventListener('submit', function () {
+      var submitBtn = enquiryForm.querySelector('button[type="submit"]');
+      if (!submitBtn || submitBtn.disabled) return;
+      submitBtn.dataset.originalHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitBtn.innerHTML = isRtl ? 'جاري الإرسال…' : 'Sending…';
+    });
+  }
 })();

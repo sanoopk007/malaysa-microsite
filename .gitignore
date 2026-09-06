@@ -1,1 +1,7 @@
 assets/video/malaysia-hero.mp4
+
+# API key/secret fallbacks — never commit real secrets. Prefer real server
+# environment variables wherever possible; these files are only a fallback
+# for hosts that don't support that.
+includes/brevo-secret.php
+includes/recaptcha-secret.php

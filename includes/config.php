@@ -84,4 +84,19 @@ $config = [
     'contact_email'    => 'khot.holidays@kr.om',
     'contact_phone'    => '+968 9928 0907',
     'khimji_site'      => 'https://www.khimjistravel.com',
+
+    // Enquiry form delivery (via Brevo Transactional Email API — see
+    // includes/sendemail.php). The API key itself is NOT stored here; it
+    // lives server-side only in includes/brevo-secret.php or the
+    // BREVO_API_KEY environment variable.
+    'brevo_sender_email' => 'sanoop@adventz.net',
+    'brevo_sender_name'  => "Khimji's House of Travel - Malaysia",
+    'brevo_to_email'     => 'khot.holidays@kr.om',
+    'brevo_cc_email'     => 'reshma@tripsnstay.com',
+
+    // Google reCAPTCHA v2 ("I'm not a robot" checkbox) on the enquiry form.
+    // The site key is public by design (Google sends it to every visitor's
+    // browser to render the widget) — only the matching secret key (verified
+    // server-side in includes/recaptcha.php) needs to stay confidential.
+    'recaptcha_site_key' => '6LcQMq0tAAAAAOA5FEGR3cHDFix-kN3PCauJdA-E',
 ];

@@ -79,12 +79,16 @@ $offerRef = $_GET['offer'] ?? '';
       <?php if ($formStatus === 'success'): ?>
         <div class="reveal is-visible" style="background:var(--color-rainforest); color:#fff; border-radius:var(--radius-md); padding:2rem; margin-bottom:2rem; text-align:center;">
           <i class="bi bi-check-circle" style="font-size:2rem; color:var(--color-gold);"></i>
-          <h2 style="margin-top:0.6rem; font-size:1.4rem; color:#fff;"><?= t('Thank you — your enquiry has been sent.', ar_pending()) ?></h2>
-          <p style="margin:0.5rem 0 0; opacity:0.9;"><?= t('A Khimji\'s House of Travel consultant will be in touch shortly.', ar_pending()) ?></p>
+          <h2 style="margin-top:0.6rem; font-size:1.4rem; color:#fff;"><?= t('Thank you for contacting Khimji\'s House of Travel.', ar_pending()) ?></h2>
+          <p style="margin:0.5rem 0 0; opacity:0.9;"><?= t('Your enquiry has been received and our team will get back to you shortly.', ar_pending()) ?></p>
         </div>
-      <?php elseif ($formStatus === 'error'): ?>
+      <?php elseif ($formStatus === 'send_error'): ?>
         <div class="reveal is-visible" style="background:var(--color-hibiscus); color:#fff; border-radius:var(--radius-md); padding:1.5rem 2rem; margin-bottom:2rem;">
-          <?= t('Something went wrong. Please check the form and try again.', ar_pending()) ?>
+          <?= t('We could not send your enquiry at the moment. Please try again shortly or contact us directly.', ar_pending()) ?>
+        </div>
+      <?php elseif ($formStatus === 'validation_error'): ?>
+        <div class="reveal is-visible" style="background:var(--color-hibiscus); color:#fff; border-radius:var(--radius-md); padding:1.5rem 2rem; margin-bottom:2rem;">
+          <?= t('Please check the information entered and try again.', ar_pending()) ?>
         </div>
       <?php endif; ?>
 
@@ -150,6 +154,9 @@ $offerRef = $_GET['offer'] ?? '';
               <label class="form-label"><?= t('Message', 'الرسالة') ?></label>
               <textarea name="message" rows="4" class="form-control" placeholder="<?= t('Tell us about your ideal trip — dates, interests, budget, anything that helps.', ar_pending()) ?>"><?= $offerRef !== '' ? htmlspecialchars(t('I\'m interested in this offer: ', 'أنا مهتم بهذا العرض: ') . $offerRef) : '' ?></textarea>
             </div>
+            <div class="col-12">
+              <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars($config['recaptcha_site_key']) ?>"></div>
+            </div>
           </div>
 
           <button type="submit" class="btn-premium btn-premium--dark" style="margin-top:1.75rem; width:100%; justify-content:center;"><?= t('Send Enquiry', 'إرسال الاستفسار') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></button>
@@ -195,6 +202,7 @@ $offerRef = $_GET['offer'] ?? '';
   </div>
 </section>
 
+<script src="https://www.google.com/recaptcha/api.js?hl=<?= $lang === 'ar' ? 'ar' : 'en' ?>" async defer></script>
 <?php require __DIR__ . '/includes/footer.php'; ?>
 </body>
 </html>
