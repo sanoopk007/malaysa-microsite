@@ -26,10 +26,18 @@ function recaptcha_secret_key(): string
 }
 
 /**
- * Verifies a solved reCAPTCHA challenge with Google's siteverify endpoint.
- * Returns false for a missing token, a misconfigured secret, a failed
- * verification, or any network/cURL problem (fails closed). Never throws
- * and never logs the secret key or the visitor's token.
+ * Minimum acceptable reCAPTCHA v3 score. Google scores each request from
+ * 0.0 (very likely a bot) to 1.0 (very likely human); 0.5 is Google's own
+ * suggested default cutoff.
+ */
+const RECAPTCHA_MIN_SCORE = 0.5;
+
+/**
+ * Verifies a solved reCAPTCHA v3 challenge with Google's siteverify
+ * endpoint. Returns false for a missing token, a misconfigured secret, a
+ * failed verification, a score below the threshold, or any network/cURL
+ * problem (fails closed). Never throws and never logs the secret key or
+ * the visitor's token.
  */
 function verify_recaptcha(string $token, string $remoteIp): bool
 {
@@ -79,6 +87,11 @@ function verify_recaptcha(string $token, string $remoteIp): bool
 
     $result = json_decode($response, true);
     if (!is_array($result) || empty($result['success'])) {
+        return false;
+    }
+
+    if (isset($result['score']) && $result['score'] < RECAPTCHA_MIN_SCORE) {
+        error_log('Enquiry recaptcha: score ' . $result['score'] . ' below threshold');
         return false;
     }
 

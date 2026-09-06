@@ -96,8 +96,9 @@ $offerRef = $_GET['offer'] ?? '';
         <h2><?= t('Send an Enquiry', 'أرسل استفسارك') ?></h2>
         <p class="contact-card__note"><?= t('Fields marked with', ar_pending()) ?> <span class="contact-required">*</span> <?= t('are required.', ar_pending()) ?></p>
 
-        <form action="includes/send-enquiry.php" method="post" novalidate>
+        <form action="includes/send-enquiry.php" method="post" novalidate data-recaptcha-sitekey="<?= htmlspecialchars($config['recaptcha_site_key']) ?>">
           <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
+          <input type="hidden" name="g-recaptcha-response" id="recaptchaToken" value="">
           <!-- Honeypot field — hidden from real users, bots tend to fill it -->
           <div style="position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;" aria-hidden="true">
             <label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
@@ -154,9 +155,6 @@ $offerRef = $_GET['offer'] ?? '';
               <label class="form-label"><?= t('Message', 'الرسالة') ?></label>
               <textarea name="message" rows="4" class="form-control" placeholder="<?= t('Tell us about your ideal trip — dates, interests, budget, anything that helps.', ar_pending()) ?>"><?= $offerRef !== '' ? htmlspecialchars(t('I\'m interested in this offer: ', 'أنا مهتم بهذا العرض: ') . $offerRef) : '' ?></textarea>
             </div>
-            <div class="col-12">
-              <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars($config['recaptcha_site_key']) ?>"></div>
-            </div>
           </div>
 
           <button type="submit" class="btn-premium btn-premium--dark" style="margin-top:1.75rem; width:100%; justify-content:center;"><?= t('Send Enquiry', 'إرسال الاستفسار') ?> <i class="bi bi-arrow-<?= $dir === 'rtl' ? 'left' : 'right' ?>"></i></button>
@@ -202,7 +200,7 @@ $offerRef = $_GET['offer'] ?? '';
   </div>
 </section>
 
-<script src="https://www.google.com/recaptcha/api.js?hl=<?= $lang === 'ar' ? 'ar' : 'en' ?>" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?render=<?= htmlspecialchars($config['recaptcha_site_key']) ?>&hl=<?= $lang === 'ar' ? 'ar' : 'en' ?>" async defer></script>
 <?php require __DIR__ . '/includes/footer.php'; ?>
 </body>
 </html>

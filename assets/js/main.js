@@ -267,13 +267,45 @@
   /* ---- Enquiry form: loading state, prevents double-submit ---- */
   var enquiryForm = document.querySelector('form[action="includes/send-enquiry.php"]');
   if (enquiryForm) {
-    enquiryForm.addEventListener('submit', function () {
-      var submitBtn = enquiryForm.querySelector('button[type="submit"]');
-      if (!submitBtn || submitBtn.disabled) return;
-      submitBtn.dataset.originalHtml = submitBtn.innerHTML;
+    var recaptchaSiteKey = enquiryForm.dataset.recaptchaSitekey;
+    var recaptchaTokenInput = document.getElementById('recaptchaToken');
+    var enquirySubmitting = false;
+
+    var showSendingState = function (submitBtn) {
+      if (submitBtn.dataset.originalHtml === undefined) {
+        submitBtn.dataset.originalHtml = submitBtn.innerHTML;
+      }
       submitBtn.disabled = true;
       submitBtn.setAttribute('aria-busy', 'true');
       submitBtn.innerHTML = isRtl ? 'جاري الإرسال…' : 'Sending…';
+    };
+
+    enquiryForm.addEventListener('submit', function (e) {
+      var submitBtn = enquiryForm.querySelector('button[type="submit"]');
+      if (enquirySubmitting) {
+        e.preventDefault();
+        return;
+      }
+
+      // reCAPTCHA v3 is invisible and generates its token asynchronously, so
+      // the real submit is deferred until the token is ready.
+      if (typeof grecaptcha === 'undefined' || !recaptchaSiteKey || !recaptchaTokenInput) {
+        if (submitBtn) showSendingState(submitBtn);
+        return; // let it submit without a token; the server handles that gracefully
+      }
+
+      e.preventDefault();
+      enquirySubmitting = true;
+      if (submitBtn) showSendingState(submitBtn);
+
+      grecaptcha.ready(function () {
+        grecaptcha.execute(recaptchaSiteKey, { action: 'contact_form' }).then(function (token) {
+          recaptchaTokenInput.value = token;
+          enquiryForm.submit();
+        }).catch(function () {
+          enquiryForm.submit();
+        });
+      });
     });
   }
 })();
