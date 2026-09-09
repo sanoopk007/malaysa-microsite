@@ -370,8 +370,8 @@ html[dir="rtl"] .mobile-drawer__sub { padding: 0 1rem 0 0; }
 /* Homepage hero only: larger "Visit Malaysia 2026-2027" eyebrow, smaller
    "Truly Asia" headline, per team feedback — other pages' heroes keep
    their own inline font-size and are unaffected. */
-.hero--home .hero__eyebrow { font-size: clamp(1.05rem, 2.1vw, 1.5rem); letter-spacing: 3px; }
-.hero--home .hero__title { font-size: clamp(2.2rem, 5.5vw, 5rem); }
+.hero--home .hero__eyebrow { font-size: clamp(2.2rem, 5.5vw, 5rem); letter-spacing: 3px; }
+.hero--home .hero__title { font-size: clamp(1.05rem, 2.1vw, 1.5rem); }
 .hero__sub { max-width: 560px; font-size: clamp(1rem, 1.3vw, 1.2rem); opacity: 0; transform: translateY(16px); color: rgba(255,255,255,0.92); }
 .hero__ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.2rem; opacity: 0; transform: translateY(16px); }
 
