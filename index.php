@@ -66,7 +66,7 @@ $pageSchema = [
 <?php require __DIR__ . '/includes/header.php'; ?>
 
 <!-- ================= HERO ================= -->
-<section class="hero">
+<section class="hero hero--home">
   <div class="hero__media">
     <picture>
       <source media="(max-width: 768px)" srcset="assets/images/optimized/misc-hero-poster-mobile-640.webp 640w, assets/images/optimized/misc-hero-poster-mobile-960.webp 960w" sizes="100vw" type="image/webp">
